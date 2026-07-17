@@ -4,117 +4,107 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>THE WORLD IS YOURS — Online Exhibition</title>
-<meta name="description" content="THE WORLD IS YOURS — multi-screen digital video, 8-channel sound installation. Online exhibition.">
+<meta name="description" content="THE WORLD IS YOURS — multi-screen digital video, 8-channel sound installation. An exhibition you visit in the dark.">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
-<nav class="lang" aria-label="Language"><span class="on">EN</span> · <a href="zh.html" lang="zh">中文</a></nav>
+<div id="cursor" aria-hidden="true"></div>
+<div id="walls" aria-hidden="true">
+  <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+    <rect x="8" y="10" width="84" height="80"/>
+    <path d="M8 62 L52 62 M60 62 L92 62"/>
+    <path d="M56 10 L56 40 M56 48 L56 62"/>
+    <path d="M70 40 L92 40"/>
+  </svg>
+</div>
+<div id="light" aria-hidden="true"></div>
+<div id="grain" aria-hidden="true"></div>
 
-<header class="hero">
+<header id="enter">
   <div class="braille" aria-hidden="true">⠠⠞⠓⠑⠀⠺⠕⠗⠇⠙⠀⠊⠎⠀⠽⠕⠥⠗⠎</div>
   <h1>THE WORLD IS YOURS</h1>
   <div class="braille" aria-hidden="true">⠱⠆⠛⠑⠱⠆⠝⠊⠙⠢</div>
-  <div class="medium">
-    <span>Multi-screen digital video · 8-channel sound installation</span>
+  <div class="med">Multi-screen digital video · 8-channel sound installation</div>
+  <div class="doors">
+    <button id="enter-sound">ENTER WITH SOUND</button>
+    <button id="enter-silent">ENTER IN SILENCE</button>
   </div>
-  <div class="down">SCROLL ↓</div>
+  <div class="hint">The room is dark. Move your light. Walk close to see.</div>
 </header>
 
-<section class="fore wrap" id="foreword">
-  <div class="rule"></div>
-  <h2>Foreword</h2>
-  <div class="h2cn"></div>
-  <p>We live, more than ever, on other people's experience. Reviews, guides, patient stories, podcasts, the advice of AI — personal experience is no longer private memory; it circulates day and night as content, evidence, care, and data. This circulation rests on an assumption we rarely examine: that experience can be spoken, heard, and handed over whole.</p>
-  <p>Yet <b>understanding always begins from a partial position</b> — no one stands inside another's experience. <b>We know more than we can tell</b>; experience keeps a tacit remainder, and language carries only its surface. Understanding was never a handover. It is an ongoing negotiation: guessing, misreading, repairing — until, at some moment, someone says: <i>I think I understand.</i></p>
-  <p>We spent long hours with several blind and low-vision friends, asking them to describe their worlds, and translated those descriptions into moving images. Precisely because between seeing and not seeing the impossibility of directly sharing experience cannot be waved away, the labor that understanding requires becomes most clearly visible. They are not the subject of this work but its most honest case: the same negotiation happens in every act of telling and listening — and it will happen between you and these images.</p>
-</section>
+<main id="field" aria-label="Eleven films in a dark field"></main>
 
-<section class="wrap" id="films">
-  <div class="rule"></div>
-  <h2>Eleven Films</h2>
-  <div class="h2cn"></div>
-  <div id="filmlist"></div>
-</section>
+<div class="corner" id="c-title">THE WORLD IS YOURS</div>
+<nav class="corner" id="c-lang" aria-label="Language"><span class="on">EN</span> · <a href="zh.html" lang="zh">中文</a></nav>
+<nav class="corner" id="c-about">
+  <button data-open="about">ABOUT</button>
+  <button data-open="voices">EIGHT VOICES</button>
+  <button data-open="onsite">ON SITE</button>
+  <button data-open="sentence" id="c-sent">THE SENTENCE →</button>
+</nav>
+<div class="corner" id="c-count">0 / 11</div>
+<div id="c-listen">STAND STILL TO LISTEN</div>
 
-<section class="sound wrap" id="sound">
-  <div class="rule"></div>
-  <h2>Eight Voices</h2>
-  <div class="h2cn"></div>
-  <p class="lead">Eight channels, eight corners of a dark room. The voices never pair with the screens: to see, you walk to an image; to listen, you stand where the channels balance. Every voice ends on the same sentence — the one this work is named after.</p>
-  <div class="channels" aria-hidden="true">
-    <div class="ch"><span>CH1</span></div><div class="ch"><span>CH2</span></div>
-    <div class="ch"><span>CH3</span></div><div class="ch"><span>CH4</span></div>
-    <div class="ch"><span>CH5</span></div><div class="ch"><span>CH6</span></div>
-    <div class="ch"><span>CH7</span></div><div class="ch"><span>CH8</span></div>
-  </div>
-  <audio controls preload="none" src="assets/audio/eight_channels.mp3"></audio>
-  <p class="note">Combined stereo reference of the eight channels, 11'09". In the room they play as eight independent sources.</p>
-</section>
+<audio id="amb" loop preload="auto" src="assets/audio/eight_channels.mp3"></audio>
 
-<section class="sentence wrap" id="sentence">
-  <div class="rule"></div>
-  <h2>The Sentence</h2>
-  <div class="h2cn"></div>
-  <div class="bigbraille" aria-label="The world is yours, in braille">⠠⠞⠓⠑⠀⠺⠕⠗⠇⠙⠀⠊⠎⠀⠽⠕⠥⠗⠎</div>
-  <div class="bigline">The world is yours.</div>
-  <div class="bigbraille" aria-label="The same sentence in Chinese braille">⠱⠆⠛⠑⠱⠆⠝⠊⠙⠢</div>
-  <p class="why">It may be a gift. It may be a trust handed over. It may simply be the version least likely to be misunderstood. We cannot tell which — and this work refuses to decide.</p>
-</section>
-
-<section class="archive wrap" id="archive">
-  <div class="rule"></div>
-  <h2>On Site</h2>
-  <div class="h2cn"></div>
-  <figure>
-    <img src="assets/img/install.jpg" alt="Installation views: small screens scattered in a dark hall; a corner neon of fractured glyphs; a white floor neon reading THE WORLD IS YOURS.">
-    <figcaption>Installation views — small screens in a blackout hall; fractured-glyph neon in the corner; the sentence as a white neon resting on the floor.</figcaption>
-  </figure>
-</section>
-
-<section class="credits wrap" id="credits">
-  <h2 style="margin-top:2em">Credits</h2>
-  <p class="st">The captions beside the films are the translators' second readings — not quotations. Some films combine the descriptions of several storytellers. They record how we listened, not what was said.</p>
-  <p>Medium: multi-screen digital video, 8-channel sound installation.</p>
-  <p>With gratitude to the blind and low-vision storytellers who lent this work their worlds. The sound layer is complete in itself: for blind and low-vision visitors it is the entire work, and the images are its translation into light.</p>
-  <p>© THE WORLD IS YOURS. All films and recordings remain with their makers.</p>
-</section>
-
-<script>
-const READINGS = [
- ["The Crane and the Moon","Someone described the moon as something near — near enough to install. So we hung it."],
- ["The Threshold","Half of it is not yet said; half already understood. The border keeps moving, and dust crosses through the light."],
- ["Brightness That Refuses","That brightness is not for seeing — it forces the eyes shut. Only when he said “bright” did we learn that brightness can refuse."],
- ["A Cathedral Overheard","A building never visited, built from adjectives overheard. The grain of the stone is the residue of other people's voices."],
- ["Steles in Fog","Grass to the knee, steles in fog. A shape without a name can still be remembered — remembering how it feels is enough."],
- ["Assemblage at Dusk","A column, pipes, a cracked tub: sentences from different people piled into one dusk. None of them is whole; together they resemble a home."],
- ["The Wire Sphere","The thing inside can't be explained — only that it burns, and that wire wraps around it. The plain is vast, the antenna thin, the fire small; it stays lit."],
- ["A Planet on No Map","The world he spoke of is on no map. Fine — give it a glowing horizon and a few yellow moons. It is wherever you say it is."],
- ["The Doorway","She stands in the doorway; beyond it, a sky described to her a thousand times. Her back is to us — seeing was never something we could finish on her behalf."],
- ["Two Cats","Two cats on a white city, watching the sun go down. Neither explains orange to the other. Some company precedes understanding, and asks for none."],
- ["Daytime Through Paper","The whole world gauzed in yellow, like light seen through paper. He said: this is my daytime. So we placed the camera inside the paper, too."]
-];
-const list = document.getElementById('filmlist');
-READINGS.forEach((r,i)=>{
-  const n = String(i+1).padStart(2,'0');
-  const d = document.createElement('div');
-  d.className='film';
-  d.innerHTML = `
-    <video controls playsinline preload="none" poster="assets/poster/film${n}.jpg" src="assets/video/film${n}.mp4"></video>
-    <div class="cap">
-      <div class="num">${n}</div>
-      <div class="t">
-        <div class="title">${r[0]}</div>
-        <div class="rd">${r[1]}</div>
+<div id="viewer" role="dialog" aria-label="Film viewer">
+  <button class="x">CLOSE</button>
+  <button class="nav prev" aria-label="Previous">←</button>
+  <button class="nav next" aria-label="Next">→</button>
+  <div class="box">
+    <video controls playsinline preload="none"></video>
+    <div class="meta">
+      <div class="n"></div>
+      <div>
+        <div class="t"></div>
+        <div class="r"></div>
       </div>
-    </div>`;
-  list.appendChild(d);
-});
-const io = new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting && !e.target.paused) e.target.pause(); }),{threshold:.1});
-document.querySelectorAll('video').forEach(v=>io.observe(v));
-document.addEventListener('play', e=>{
-  document.querySelectorAll('video,audio').forEach(m=>{ if(m!==e.target) m.pause(); });
-}, true);
-</script>
+    </div>
+  </div>
+</div>
+
+<section class="veil" id="about" role="dialog" aria-label="About">
+  <button class="x">CLOSE</button>
+  <div class="inner">
+    <h2>About</h2>
+    <p>We live, more than ever, on other people's experience. Reviews, guides, patient stories, podcasts, the advice of AI — personal experience is no longer private memory; it circulates day and night as content, evidence, care, and data. This circulation rests on an assumption we rarely examine: that experience can be spoken, heard, and handed over whole.</p>
+    <p>Yet <b>understanding always begins from a partial position</b> — no one stands inside another's experience. <b>We know more than we can tell</b>; experience keeps a tacit remainder, and language carries only its surface. Understanding was never a handover. It is an ongoing negotiation: guessing, misreading, repairing — until, at some moment, someone says: <i>I think I understand.</i></p>
+    <p>We spent long hours with several blind and low-vision friends, asking them to describe their worlds, and translated those descriptions into moving images. They are not the subject of this work but its most honest case: the same negotiation happens in every act of telling and listening — and it is happening now, between you and this dark room.</p>
+    <p class="fine">The captions beside the films are the translators' second readings — not quotations. Some films combine the descriptions of several storytellers. They record how we listened, not what was said.<br><br>Medium: multi-screen digital video, 8-channel sound installation. The sound layer is complete in itself: for blind and low-vision visitors it is the entire work, and the images are its translation into light.<br><br>© THE WORLD IS YOURS. All films and recordings remain with their makers.</p>
+  </div>
+</section>
+
+<section class="veil" id="voices" role="dialog" aria-label="Eight voices">
+  <button class="x">CLOSE</button>
+  <div class="inner">
+    <h2>Eight Voices</h2>
+    <p>Eight channels, eight corners of a dark room. The voices never pair with the screens: to see, you walk to an image; to listen, you stand where the channels balance. No position lets you do both at once.</p>
+    <p>Here, the same rule holds: <b>the voices surface only while you keep still.</b> Move your light, and they sink back into the dark. Every voice ends on the same sentence — the one this work is named after.</p>
+    <p class="fine">Combined stereo reference of the eight channels, 11'09". In the room they play as eight independent sources.</p>
+  </div>
+</section>
+
+<section class="veil" id="onsite" role="dialog" aria-label="On site">
+  <button class="x">CLOSE</button>
+  <div class="inner">
+    <h2>On Site</h2>
+    <p style="margin-bottom:2em"><img src="assets/img/install.jpg" alt="Installation views: small screens scattered in a dark hall; a corner neon of fractured glyphs; a white floor neon reading THE WORLD IS YOURS." style="width:100%;display:block"></p>
+    <p class="fine">Installation views — small screens in a blackout hall; fractured-glyph neon in the corner; the sentence as a white neon resting on the floor.</p>
+  </div>
+</section>
+
+<section class="veil" id="sentence" role="dialog" aria-label="The sentence">
+  <button class="x">CLOSE</button>
+  <div class="inner">
+    <div class="bb" aria-hidden="true">⠠⠞⠓⠑⠀⠺⠕⠗⠇⠙⠀⠊⠎⠀⠽⠕⠥⠗⠎</div>
+    <div class="line">The world is yours.</div>
+    <div class="bb" aria-hidden="true">⠱⠆⠛⠑⠱⠆⠝⠊⠙⠢</div>
+    <p class="why">It may be a gift. It may be a trust handed over. It may simply be the version least likely to be misunderstood. We cannot tell which — and this work refuses to decide.</p>
+  </div>
+</section>
+
+<script>window.LANG='en'</script>
+<script src="assets/app.js"></script>
 </body>
 </html>

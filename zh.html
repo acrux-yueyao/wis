@@ -4,122 +4,107 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>世界是你的 — 线上展览</title>
-<meta name="description" content="世界是你的 — 多屏数字影像，8声道声音装置。线上展览。">
+<meta name="description" content="世界是你的 — 多屏数字影像，8声道声音装置。一场在黑暗中观看的展览。">
 <link rel="stylesheet" href="assets/site.css">
-<style>
-  h1{letter-spacing:.6em;text-indent:.6em;font-size:clamp(28px,5.4vw,52px)}
-  .fore p,.sound p.lead{font-size:16px}
-  .cap .rd{font-style:normal}
-</style>
 </head>
 <body>
 
-<nav class="lang" aria-label="语言"><a href="index.html" lang="en">EN</a> · <span class="on">中文</span></nav>
+<div id="cursor" aria-hidden="true"></div>
+<div id="walls" aria-hidden="true">
+  <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+    <rect x="8" y="10" width="84" height="80"/>
+    <path d="M8 62 L52 62 M60 62 L92 62"/>
+    <path d="M56 10 L56 40 M56 48 L56 62"/>
+    <path d="M70 40 L92 40"/>
+  </svg>
+</div>
+<div id="light" aria-hidden="true"></div>
+<div id="grain" aria-hidden="true"></div>
 
-<header class="hero">
+<header id="enter">
   <div class="braille" aria-hidden="true">⠱⠆⠛⠑⠱⠆⠝⠊⠙⠢</div>
-  <h1>世界是你的</h1>
+  <h1 class="zh">世界是你的</h1>
   <div class="braille" aria-hidden="true">⠠⠞⠓⠑⠀⠺⠕⠗⠇⠙⠀⠊⠎⠀⠽⠕⠥⠗⠎</div>
-  <div class="medium">
-    <span>多屏数字影像 · 8声道声音装置</span>
+  <div class="med">多屏数字影像 · 8声道声音装置</div>
+  <div class="doors">
+    <button id="enter-sound">带 声 进 入</button>
+    <button id="enter-silent">安 静 进 入</button>
   </div>
-  <div class="down">向下滚动 ↓</div>
+  <div class="hint">展厅是暗的。移动你的光。走近才能看清。</div>
 </header>
 
-<section class="fore wrap" id="foreword">
-  <div class="rule"></div>
-  <h2>前言</h2>
-  <div class="h2cn"></div>
-  <p>我们比任何时代都更依赖他人的经验生活。攻略、测评、患者自述、播客、AI 的建议——个人经验不再只是私人记忆，它以内容、证据、照护和数据的形式昼夜流通。这套流通建立在一个很少被检查的前提上：经验可以被说出、被听懂、被完整地交到另一个人手里。</p>
-  <p>可是<b>理解永远从一个局部的位置出发</b>——没有人能站进他人的经验内部。<b>我们知道的，多于我们能说出的</b>；经验里总有默会的部分，语言只能携带它的表层。所谓理解，从来不是一次交付，而是一场持续的协商：试探、误解、修正——直到某个瞬间，有人说，我好像懂了。</p>
-  <p>我们与几位视障朋友长谈，请他们描述自己的世界，再把这些描述转译成画面。恰恰因为在看得见与看不见之间，"经验无法直接共享"最无从回避，理解所需要的劳动也最清晰可见。他们不是这件作品的对象，而是它最诚实的例子——同样的协商，发生在每一次讲述与倾听之间，也将发生在你与这些画面之间。</p>
-</section>
+<main id="field" aria-label="黑暗中的十一段影像"></main>
 
-<section class="wrap" id="films">
-  <div class="rule"></div>
-  <h2>十一段影像</h2>
-  <div class="h2cn"></div>
-  <div id="filmlist"></div>
-</section>
+<div class="corner" id="c-title">世界是你的</div>
+<nav class="corner" id="c-lang" aria-label="语言"><a href="index.html" lang="en">EN</a> · <span class="on">中文</span></nav>
+<nav class="corner" id="c-about">
+  <button data-open="about">关 于</button>
+  <button data-open="voices">八 个 声 道</button>
+  <button data-open="onsite">现 场</button>
+  <button data-open="sentence" id="c-sent">那 句 话 →</button>
+</nav>
+<div class="corner" id="c-count">0 / 11</div>
+<div id="c-listen">驻 足 即 听</div>
 
-<section class="sound wrap" id="sound">
-  <div class="rule"></div>
-  <h2>八个声道</h2>
-  <div class="h2cn"></div>
-  <p class="lead">八个声道占据黑暗展厅的八个角落，与画面从不配对：看要走近，听要驻足，没有一个位置能同时占有两者。每个声音都结束在同一句话上——就是这件作品的名字。</p>
-  <div class="channels" aria-hidden="true">
-    <div class="ch"><span>CH1</span></div><div class="ch"><span>CH2</span></div>
-    <div class="ch"><span>CH3</span></div><div class="ch"><span>CH4</span></div>
-    <div class="ch"><span>CH5</span></div><div class="ch"><span>CH6</span></div>
-    <div class="ch"><span>CH7</span></div><div class="ch"><span>CH8</span></div>
-  </div>
-  <audio controls preload="none" src="assets/audio/eight_channels.mp3"></audio>
-  <p class="note">八声道集合参考版，11'09"。现场为八个独立声源。</p>
-</section>
+<audio id="amb" loop preload="auto" src="assets/audio/eight_channels.mp3"></audio>
 
-<section class="sentence wrap" id="sentence">
-  <div class="rule"></div>
-  <h2>那句话</h2>
-  <div class="h2cn"></div>
-  <div class="bigbraille" aria-label="世界是你的，中文盲文">⠱⠆⠛⠑⠱⠆⠝⠊⠙⠢</div>
-  <div class="bigline">世界是你的。</div>
-  <div class="bigbraille" aria-label="同一句话的英文盲文">⠠⠞⠓⠑⠀⠺⠕⠗⠇⠙⠀⠊⠎⠀⠽⠕⠥⠗⠎</div>
-  <p class="why">它可以是一句馈赠，一句托付，也可能只是最不容易被误解的版本。我们无法分辨——这件作品也拒绝替你分辨。</p>
-</section>
-
-<section class="archive wrap" id="archive">
-  <div class="rule"></div>
-  <h2>现场</h2>
-  <div class="h2cn"></div>
-  <figure>
-    <img src="assets/img/install.jpg" alt="布展现场：全黑展厅中散布的小屏幕；墙角的拆解字形霓虹；落地的白色霓虹句子 THE WORLD IS YOURS。">
-    <figcaption>现场——全黑展厅中的小屏阵列、墙角的拆解字形霓虹、落地的白色霓虹句子。</figcaption>
-  </figure>
-</section>
-
-<section class="credits wrap" id="credits">
-  <h2 style="margin-top:2em">致谢与说明</h2>
-  <p class="st">影像旁的文字是转译者的再读，不是讲述者原话；部分画面由多位讲述者的描述结合而成。它们记录的是我们如何听，而不是他们说了什么。</p>
-  <p>媒介：多屏数字影像，8声道声音装置。</p>
-  <p>谨向出借了自己世界的视障讲述者致谢。声音层本身即完整作品：对视障观众而言它就是全部，画面是它向光的转译。</p>
-  <p>© 世界是你的 THE WORLD IS YOURS。全部影像与录音归创作者所有。</p>
-</section>
-
-<script>
-const READINGS = [
- ["塔吊与月亮","有人把月亮说得很近，近到像一件可以安装的东西。我们就把它挂上去了。"],
- ["边界","一半是还没说出的，一半是已经听懂的。中间那条边界一直在移动，尘埃在光里过境。"],
- ["睁不开眼的亮","那种亮不是用来看见的亮，是睁不开眼的亮。他说“亮”的时候，我们才知道亮也可以是一种拒绝。"],
- ["听来的教堂","一座从来没有去过的建筑，用听来的形容词砌成。石头的纹理，是别人的声音留下的。"],
- ["雾中石碑","草长到膝盖，碑站在雾里。没有名字的形状也可以被记住——记住它的手感就够了。"],
- ["黄昏里的拼装","柱子、水管、一只裂了的浴缸：不同人的句子堆在同一个黄昏里。没有一件是完整的，合起来却像一个家。"],
- ["原野上的线团","心里的那团东西说不清楚，只能说它在烧，外面缠着线。原野很大，天线很细，火很小，但一直亮着。"],
- ["不在地图上的行星","他说的世界不在地图上。好——那就给它一条发光的地平线，几颗黄色的月亮。你说它在哪里，它就在哪里。"],
- ["门框里的背影","她站在门里，门外是别人替她描述过一千次的天空。她背对我们——因为看见，从来不是我们能替她完成的事。"],
- ["两只猫","两只猫坐在白色的城市上看落日。它们不需要向对方解释橙色。有些陪伴先于理解，也不索取理解。"],
- ["隔着纸的白天","整个世界蒙上一层黄，像隔着一张纸看光。他说：这就是我的白天。我们把摄影机也放进了那张纸里。"]
-];
-const list = document.getElementById('filmlist');
-READINGS.forEach((r,i)=>{
-  const n = String(i+1).padStart(2,'0');
-  const d = document.createElement('div');
-  d.className='film';
-  d.innerHTML = `
-    <video controls playsinline preload="none" poster="assets/poster/film${n}.jpg" src="assets/video/film${n}.mp4"></video>
-    <div class="cap">
-      <div class="num">${n}</div>
-      <div class="t">
-        <div class="title">${r[0]}</div>
-        <div class="rd">${r[1]}</div>
+<div id="viewer" role="dialog" aria-label="影像查看">
+  <button class="x">关 闭</button>
+  <button class="nav prev" aria-label="上一段">←</button>
+  <button class="nav next" aria-label="下一段">→</button>
+  <div class="box">
+    <video controls playsinline preload="none"></video>
+    <div class="meta">
+      <div class="n"></div>
+      <div>
+        <div class="t"></div>
+        <div class="r"></div>
       </div>
-    </div>`;
-  list.appendChild(d);
-});
-const io = new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting && !e.target.paused) e.target.pause(); }),{threshold:.1});
-document.querySelectorAll('video').forEach(v=>io.observe(v));
-document.addEventListener('play', e=>{
-  document.querySelectorAll('video,audio').forEach(m=>{ if(m!==e.target) m.pause(); });
-}, true);
-</script>
+    </div>
+  </div>
+</div>
+
+<section class="veil" id="about" role="dialog" aria-label="关于">
+  <button class="x">关 闭</button>
+  <div class="inner">
+    <h2>关于</h2>
+    <p>我们比任何时代都更依赖他人的经验生活。攻略、测评、患者自述、播客、AI 的建议——个人经验不再只是私人记忆，它以内容、证据、照护和数据的形式昼夜流通。这套流通建立在一个很少被检查的前提上：经验可以被说出、被听懂、被完整地交到另一个人手里。</p>
+    <p>可是<b>理解永远从一个局部的位置出发</b>——没有人能站进他人的经验内部。<b>我们知道的，多于我们能说出的</b>。所谓理解，从来不是一次交付，而是一场持续的协商：试探、误解、修正——直到某个瞬间，有人说，我好像懂了。</p>
+    <p>我们与几位视障朋友长谈，请他们描述自己的世界，再把这些描述转译成画面。他们不是这件作品的对象，而是它最诚实的例子——同样的协商，发生在每一次讲述与倾听之间，此刻也发生在你与这间暗室之间。</p>
+    <p class="fine">影像旁的文字是转译者的再读，不是讲述者原话；部分画面由多位讲述者的描述结合而成。它们记录的是我们如何听，而不是他们说了什么。<br><br>媒介：多屏数字影像，8声道声音装置。声音层本身即完整作品：对视障观众而言它就是全部，画面是它向光的转译。<br><br>© 世界是你的 THE WORLD IS YOURS。全部影像与录音归创作者所有。</p>
+  </div>
+</section>
+
+<section class="veil" id="voices" role="dialog" aria-label="八个声道">
+  <button class="x">关 闭</button>
+  <div class="inner">
+    <h2>八个声道</h2>
+    <p>八个声道占据黑暗展厅的八个角落，与画面从不配对：看要走近，听要驻足，没有一个位置能同时占有两者。</p>
+    <p>在这里，同样的规则成立：<b>只有停下不动，声音才会浮上来。</b>一旦移动你的光，它们就沉回黑暗。每个声音都结束在同一句话上——就是这件作品的名字。</p>
+    <p class="fine">八声道集合参考版，11'09"。现场为八个独立声源。</p>
+  </div>
+</section>
+
+<section class="veil" id="onsite" role="dialog" aria-label="现场">
+  <button class="x">关 闭</button>
+  <div class="inner">
+    <h2>现场</h2>
+    <p style="margin-bottom:2em"><img src="assets/img/install.jpg" alt="布展现场：全黑展厅中散布的小屏幕；墙角的拆解字形霓虹；落地的白色霓虹句子。" style="width:100%;display:block"></p>
+    <p class="fine">现场——全黑展厅中的小屏阵列、墙角的拆解字形霓虹、落地的白色霓虹句子。</p>
+  </div>
+</section>
+
+<section class="veil" id="sentence" role="dialog" aria-label="那句话">
+  <button class="x">关 闭</button>
+  <div class="inner">
+    <div class="bb" aria-hidden="true">⠱⠆⠛⠑⠱⠆⠝⠊⠙⠢</div>
+    <div class="line">世界是你的。</div>
+    <div class="bb" aria-hidden="true">⠠⠞⠓⠑⠀⠺⠕⠗⠇⠙⠀⠊⠎⠀⠽⠕⠥⠗⠎</div>
+    <p class="why">它可以是一句馈赠，一句托付，也可能只是最不容易被误解的版本。我们无法分辨——这件作品也拒绝替你分辨。</p>
+  </div>
+</section>
+
+<script>window.LANG='zh'</script>
+<script src="assets/app.js"></script>
 </body>
 </html>
