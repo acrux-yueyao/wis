@@ -3,94 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>THE WORLD IS YOURS 世界是你的 — Online Exhibition</title>
-<meta name="description" content="THE WORLD IS YOURS / 世界是你的 — multi-screen digital video, 8-channel sound installation. Online exhibition.">
-<style>
-  :root{
-    --bg:#060608; --ink:#e8e5dc; --sub:#8f8c84; --amber:#e8a33d; --line:#26262b;
-    --serif:Georgia,'Songti SC','Noto Serif SC',serif;
-    --sans:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.75;-webkit-font-smoothing:antialiased}
-  ::selection{background:var(--amber);color:#111}
-  a{color:var(--amber);text-decoration:none}
-  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
-
-  /* hero */
-  .hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:12vh 24px 8vh}
-  .braille{font-size:clamp(15px,2.6vw,22px);letter-spacing:.45em;color:var(--sub);margin:.5em 0}
-  h1{font-family:var(--sans);font-weight:300;font-size:clamp(30px,6vw,58px);letter-spacing:.24em;margin:.4em 0 .15em;text-indent:.24em}
-  .h1cn{font-size:clamp(17px,2.8vw,24px);letter-spacing:.9em;color:var(--ink);text-indent:.9em;font-weight:300}
-  .medium{margin-top:3.2em;color:var(--sub);font-size:13px;letter-spacing:.12em}
-  .medium span{display:block}
-  .down{margin-top:6vh;color:var(--sub);font-size:12px;letter-spacing:.3em;animation:pulse 3s infinite}
-  @keyframes pulse{0%,100%{opacity:.35}50%{opacity:.9}}
-
-  section{padding:14vh 0}
-  .rule{width:42px;height:1px;background:var(--amber);margin-bottom:3em}
-  h2{font-weight:400;font-size:13px;letter-spacing:.34em;color:var(--amber);text-transform:uppercase;margin-bottom:.6em}
-  .h2cn{font-size:12px;letter-spacing:.5em;color:var(--sub);margin-bottom:3em}
-
-  /* foreword */
-  .fore p{font-family:var(--serif);font-size:16.5px;color:#cfccc3;margin-bottom:1.6em;max-width:46em}
-  .fore .cn p{font-size:15px;color:#a5a29a}
-  .fore b{font-weight:600;color:var(--ink)}
-  details.cn{margin-top:2.5em;border-top:1px solid var(--line);padding-top:1.6em}
-  details.cn summary{cursor:pointer;color:var(--sub);font-size:13px;letter-spacing:.2em;list-style:none}
-  details.cn summary::before{content:'+ ';color:var(--amber)}
-  details.cn[open] summary::before{content:'− '}
-  details.cn[open] summary{margin-bottom:1.6em}
-
-  /* films */
-  .film{margin-bottom:12vh}
-  .film video{width:100%;display:block;background:#000;border:1px solid var(--line)}
-  .cap{display:flex;gap:2em;margin-top:1.3em;align-items:baseline}
-  .num{font-family:var(--serif);color:var(--amber);font-size:14px;white-space:nowrap;letter-spacing:.1em}
-  .cap .t{flex:1}
-  .cap .title{font-size:14px;letter-spacing:.14em;color:var(--ink);margin-bottom:.5em}
-  .cap .rd{font-family:var(--serif);font-style:italic;color:#b9b6ad;font-size:15px;max-width:44em}
-  .cap .rdcn{font-family:var(--serif);color:#8f8c84;font-size:13.5px;margin-top:.4em;font-style:normal}
-  .twice{color:var(--sub);font-size:11px;letter-spacing:.18em;margin-left:.8em}
-
-  /* sound */
-  .sound p.lead{font-family:var(--serif);font-size:16.5px;color:#cfccc3;max-width:44em;margin-bottom:2.2em}
-  .channels{display:flex;gap:10px;height:120px;align-items:flex-end;margin:3em 0 2.5em}
-  .ch{flex:1;background:linear-gradient(to top,#3f8a7f66,#3f8a7f11);border-top:2px solid #3f8a7f;min-height:30%;position:relative}
-  .ch:nth-child(2n){min-height:55%} .ch:nth-child(3n){min-height:75%} .ch:nth-child(5n){min-height:45%}
-  .ch span{position:absolute;bottom:-1.8em;left:50%;transform:translateX(-50%);font-size:10px;color:var(--sub);letter-spacing:.1em}
-  audio{width:100%;margin-top:2.5em;filter:invert(1) hue-rotate(180deg);opacity:.85}
-  .note{color:var(--sub);font-size:13px;margin-top:1.2em}
-
-  /* sentence */
-  .sentence{text-align:center}
-  .sentence .rule{margin-left:auto;margin-right:auto}
-  .bigbraille{font-size:clamp(18px,3.4vw,30px);letter-spacing:.4em;color:var(--ink);margin:1.2em 0 .4em}
-  .bigline{font-family:var(--serif);font-size:clamp(20px,3.6vw,32px);letter-spacing:.14em;margin:.3em 0}
-  .sentence .why{font-family:var(--serif);font-style:italic;color:#a5a29a;max-width:38em;margin:2.6em auto 0;font-size:15.5px}
-
-  /* archive */
-  .archive img{width:100%;border:1px solid var(--line);display:block}
-  .archive figcaption{color:var(--sub);font-size:13px;margin-top:1em}
-
-  /* credits */
-  .credits{border-top:1px solid var(--line);padding-bottom:10vh}
-  .credits p{color:var(--sub);font-size:13.5px;max-width:46em;margin-bottom:1.2em}
-  .credits .st{font-family:var(--serif);font-style:italic;color:#a5a29a;font-size:14.5px}
-  @media(max-width:600px){.cap{flex-direction:column;gap:.5em}}
-</style>
+<title>THE WORLD IS YOURS — Online Exhibition</title>
+<meta name="description" content="THE WORLD IS YOURS — multi-screen digital video, 8-channel sound installation. Online exhibition.">
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
+
+<nav class="lang" aria-label="Language"><span class="on">EN</span> · <a href="zh.html" lang="zh">中文</a></nav>
 
 <header class="hero">
   <div class="braille" aria-hidden="true">⠠⠞⠓⠑⠀⠺⠕⠗⠇⠙⠀⠊⠎⠀⠽⠕⠥⠗⠎</div>
   <h1>THE WORLD IS YOURS</h1>
-  <div class="h1cn">世界是你的</div>
   <div class="braille" aria-hidden="true">⠱⠆⠛⠑⠱⠆⠝⠊⠙⠢</div>
   <div class="medium">
     <span>Multi-screen digital video · 8-channel sound installation</span>
-    <span>多屏数字影像 · 8声道声音装置</span>
   </div>
   <div class="down">SCROLL ↓</div>
 </header>
@@ -98,34 +24,24 @@
 <section class="fore wrap" id="foreword">
   <div class="rule"></div>
   <h2>Foreword</h2>
-  <div class="h2cn">前言</div>
+  <div class="h2cn"></div>
   <p>We live, more than ever, on other people's experience. Reviews, guides, patient stories, podcasts, the advice of AI — personal experience is no longer private memory; it circulates day and night as content, evidence, care, and data. This circulation rests on an assumption we rarely examine: that experience can be spoken, heard, and handed over whole.</p>
   <p>Yet <b>understanding always begins from a partial position</b> — no one stands inside another's experience. <b>We know more than we can tell</b>; experience keeps a tacit remainder, and language carries only its surface. Understanding was never a handover. It is an ongoing negotiation: guessing, misreading, repairing — until, at some moment, someone says: <i>I think I understand.</i></p>
   <p>We spent long hours with several blind and low-vision friends, asking them to describe their worlds, and translated those descriptions into moving images. Precisely because between seeing and not seeing the impossibility of directly sharing experience cannot be waved away, the labor that understanding requires becomes most clearly visible. They are not the subject of this work but its most honest case: the same negotiation happens in every act of telling and listening — and it will happen between you and these images.</p>
-  <details class="cn">
-    <summary>中文前言</summary>
-    <div class="cn">
-      <p>我们比任何时代都更依赖他人的经验生活。攻略、测评、患者自述、播客、AI 的建议——个人经验不再只是私人记忆，它以内容、证据、照护和数据的形式昼夜流通。这套流通建立在一个很少被检查的前提上：经验可以被说出、被听懂、被完整地交到另一个人手里。</p>
-      <p>可是<b>理解永远从一个局部的位置出发</b>——没有人能站进他人的经验内部。<b>我们知道的，多于我们能说出的</b>。所谓理解，从来不是一次交付，而是一场持续的协商：试探、误解、修正——直到某个瞬间，有人说，我好像懂了。</p>
-      <p>我们与几位视障朋友长谈，请他们描述自己的世界，再把这些描述转译成画面。恰恰因为在看得见与看不见之间，"经验无法直接共享"最无从回避，理解所需要的劳动也最清晰可见。他们不是这件作品的对象，而是它最诚实的例子——同样的协商，发生在每一次讲述与倾听之间，也将发生在你与这些画面之间。</p>
-    </div>
-  </details>
 </section>
 
 <section class="wrap" id="films">
   <div class="rule"></div>
   <h2>Eleven Films</h2>
-  <div class="h2cn">十一段影像</div>
-  <!-- films injected by script -->
+  <div class="h2cn"></div>
   <div id="filmlist"></div>
 </section>
 
 <section class="sound wrap" id="sound">
   <div class="rule"></div>
   <h2>Eight Voices</h2>
-  <div class="h2cn">八个声道</div>
+  <div class="h2cn"></div>
   <p class="lead">Eight channels, eight corners of a dark room. The voices never pair with the screens: to see, you walk to an image; to listen, you stand where the channels balance. Every voice ends on the same sentence — the one this work is named after.</p>
-  <p class="lead" style="font-size:14.5px;color:#a5a29a">八个声道占据黑暗展厅的八个角落，与画面从不配对：看要走近，听要驻足。每个声音都结束在同一句话上——就是这件作品的名字。</p>
   <div class="channels" aria-hidden="true">
     <div class="ch"><span>CH1</span></div><div class="ch"><span>CH2</span></div>
     <div class="ch"><span>CH3</span></div><div class="ch"><span>CH4</span></div>
@@ -133,73 +49,50 @@
     <div class="ch"><span>CH7</span></div><div class="ch"><span>CH8</span></div>
   </div>
   <audio controls preload="none" src="assets/audio/eight_channels.mp3"></audio>
-  <p class="note">Combined stereo reference of the eight channels, 11'09". In the room they play as eight independent sources. 八声道集合参考版；现场为八个独立声源。</p>
+  <p class="note">Combined stereo reference of the eight channels, 11'09". In the room they play as eight independent sources.</p>
 </section>
 
 <section class="sentence wrap" id="sentence">
   <div class="rule"></div>
   <h2>The Sentence</h2>
-  <div class="h2cn">那句话</div>
+  <div class="h2cn"></div>
   <div class="bigbraille" aria-label="The world is yours, in braille">⠠⠞⠓⠑⠀⠺⠕⠗⠇⠙⠀⠊⠎⠀⠽⠕⠥⠗⠎</div>
   <div class="bigline">The world is yours.</div>
-  <div class="bigline" style="font-size:clamp(16px,2.6vw,24px)">世界是你的。</div>
-  <div class="bigbraille" aria-label="世界是你的，中文盲文">⠱⠆⠛⠑⠱⠆⠝⠊⠙⠢</div>
-  <p class="why">It may be a gift. It may be a trust handed over. It may simply be the version least likely to be misunderstood. We cannot tell which — and this work refuses to decide.<br>它可以是一句馈赠，一句托付，也可能只是最不容易被误解的版本。我们无法分辨——这件作品也拒绝替你分辨。</p>
+  <div class="bigbraille" aria-label="The same sentence in Chinese braille">⠱⠆⠛⠑⠱⠆⠝⠊⠙⠢</div>
+  <p class="why">It may be a gift. It may be a trust handed over. It may simply be the version least likely to be misunderstood. We cannot tell which — and this work refuses to decide.</p>
 </section>
 
 <section class="archive wrap" id="archive">
   <div class="rule"></div>
   <h2>On Site</h2>
-  <div class="h2cn">现场</div>
+  <div class="h2cn"></div>
   <figure>
     <img src="assets/img/install.jpg" alt="Installation views: small screens scattered in a dark hall; a corner neon of fractured glyphs; a white floor neon reading THE WORLD IS YOURS.">
-    <figcaption>Installation views — small screens in a blackout hall; fractured-glyph neon in the corner; the sentence as a white neon resting on the floor. 现场：全黑展厅中的小屏阵列、墙角的拆解字形霓虹、落地的白色霓虹句子。</figcaption>
+    <figcaption>Installation views — small screens in a blackout hall; fractured-glyph neon in the corner; the sentence as a white neon resting on the floor.</figcaption>
   </figure>
 </section>
 
 <section class="credits wrap" id="credits">
   <h2 style="margin-top:2em">Credits</h2>
-  <p class="st">The captions beside the films are the translators' second readings — not quotations. Some films combine the descriptions of several storytellers. They record how we listened, not what was said.<br>影像旁的文字是转译者的再读，不是讲述者原话；部分画面由多位讲述者的描述结合而成。它们记录的是我们如何听，而不是他们说了什么。</p>
-  <p>Medium: multi-screen digital video, 8-channel sound installation · 多屏数字影像，8声道声音装置</p>
-  <p>With gratitude to the blind and low-vision storytellers who lent this work their worlds. The sound layer is complete in itself: for blind and low-vision visitors it is the entire work, and the images are its translation into light. 谨向出借了自己世界的视障讲述者致谢。声音层本身即完整作品：对视障观众而言它就是全部，画面是它向光的转译。</p>
+  <p class="st">The captions beside the films are the translators' second readings — not quotations. Some films combine the descriptions of several storytellers. They record how we listened, not what was said.</p>
+  <p>Medium: multi-screen digital video, 8-channel sound installation.</p>
+  <p>With gratitude to the blind and low-vision storytellers who lent this work their worlds. The sound layer is complete in itself: for blind and low-vision visitors it is the entire work, and the images are its translation into light.</p>
   <p>© THE WORLD IS YOURS. All films and recordings remain with their makers.</p>
 </section>
 
 <script>
 const READINGS = [
- ["The Crane and the Moon","塔吊与月亮",
-  "Someone described the moon as something near — near enough to install. So we hung it.",
-  "有人把月亮说得很近，近到像一件可以安装的东西。我们就把它挂上去了。"],
- ["The Threshold","边界",
-  "Half of it is not yet said; half already understood. The border keeps moving, and dust crosses through the light.",
-  "一半是还没说出的，一半是已经听懂的。中间那条边界一直在移动，尘埃在光里过境。"],
- ["Brightness That Refuses","睁不开眼的亮",
-  "That brightness is not for seeing — it forces the eyes shut. Only when he said “bright” did we learn that brightness can refuse.",
-  "那种亮不是用来看见的亮，是睁不开眼的亮。他说“亮”的时候，我们才知道亮也可以是一种拒绝。"],
- ["A Cathedral Overheard","听来的教堂",
-  "A building never visited, built from adjectives overheard. The grain of the stone is the residue of other people's voices.",
-  "一座从来没有去过的建筑，用听来的形容词砌成。石头的纹理，是别人的声音留下的。"],
- ["Steles in Fog","雾中石碑",
-  "Grass to the knee, steles in fog. A shape without a name can still be remembered — remembering how it feels is enough.",
-  "草长到膝盖，碑站在雾里。没有名字的形状也可以被记住——记住它的手感就够了。"],
- ["Assemblage at Dusk","黄昏里的拼装",
-  "A column, pipes, a cracked tub: sentences from different people piled into one dusk. None of them is whole; together they resemble a home.",
-  "柱子、水管、一只裂了的浴缸：不同人的句子堆在同一个黄昏里。没有一件是完整的，合起来却像一个家。"],
- ["The Wire Sphere","原野上的线团",
-  "The thing inside can't be explained — only that it burns, and that wire wraps around it. The plain is vast, the antenna thin, the fire small; it stays lit.",
-  "心里的那团东西说不清楚，只能说它在烧，外面缠着线。原野很大，天线很细，火很小，但一直亮着。"],
- ["A Planet on No Map","不在地图上的行星",
-  "The world he spoke of is on no map. Fine — give it a glowing horizon and a few yellow moons. It is wherever you say it is.",
-  "他说的世界不在地图上。好——那就给它一条发光的地平线，几颗黄色的月亮。你说它在哪里，它就在哪里。"],
- ["The Doorway","门框里的背影",
-  "She stands in the doorway; beyond it, a sky described to her a thousand times. Her back is to us — seeing was never something we could finish on her behalf.",
-  "她站在门里，门外是别人替她描述过一千次的天空。她背对我们——因为看见，从来不是我们能替她完成的事。"],
- ["Two Cats","两只猫",
-  "Two cats on a white city, watching the sun go down. Neither explains orange to the other. Some company precedes understanding, and asks for none.",
-  "两只猫坐在白色的城市上看落日。它们不需要向对方解释橙色。有些陪伴先于理解，也不索取理解。"],
- ["Daytime Through Paper","隔着纸的白天",
-  "The whole world gauzed in yellow, like light seen through paper. He said: this is my daytime. So we placed the camera inside the paper, too.",
-  "整个世界蒙上一层黄，像隔着一张纸看光。他说：这就是我的白天。我们把摄影机也放进了那张纸里。"]
+ ["The Crane and the Moon","Someone described the moon as something near — near enough to install. So we hung it."],
+ ["The Threshold","Half of it is not yet said; half already understood. The border keeps moving, and dust crosses through the light."],
+ ["Brightness That Refuses","That brightness is not for seeing — it forces the eyes shut. Only when he said “bright” did we learn that brightness can refuse."],
+ ["A Cathedral Overheard","A building never visited, built from adjectives overheard. The grain of the stone is the residue of other people's voices."],
+ ["Steles in Fog","Grass to the knee, steles in fog. A shape without a name can still be remembered — remembering how it feels is enough."],
+ ["Assemblage at Dusk","A column, pipes, a cracked tub: sentences from different people piled into one dusk. None of them is whole; together they resemble a home."],
+ ["The Wire Sphere","The thing inside can't be explained — only that it burns, and that wire wraps around it. The plain is vast, the antenna thin, the fire small; it stays lit."],
+ ["A Planet on No Map","The world he spoke of is on no map. Fine — give it a glowing horizon and a few yellow moons. It is wherever you say it is."],
+ ["The Doorway","She stands in the doorway; beyond it, a sky described to her a thousand times. Her back is to us — seeing was never something we could finish on her behalf."],
+ ["Two Cats","Two cats on a white city, watching the sun go down. Neither explains orange to the other. Some company precedes understanding, and asks for none."],
+ ["Daytime Through Paper","The whole world gauzed in yellow, like light seen through paper. He said: this is my daytime. So we placed the camera inside the paper, too."]
 ];
 const list = document.getElementById('filmlist');
 READINGS.forEach((r,i)=>{
@@ -211,18 +104,14 @@ READINGS.forEach((r,i)=>{
     <div class="cap">
       <div class="num">${n}</div>
       <div class="t">
-        <div class="title">${r[0]}<span style="color:var(--sub)"> · ${r[1]}</span></div>
-        <div class="rd">${r[2]}</div>
-        <div class="rdcn">${r[3]}</div>
+        <div class="title">${r[0]}</div>
+        <div class="rd">${r[1]}</div>
       </div>
     </div>`;
   list.appendChild(d);
 });
-// 离屏自动暂停
-const vids = () => document.querySelectorAll('video');
 const io = new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting && !e.target.paused) e.target.pause(); }),{threshold:.1});
-vids().forEach(v=>io.observe(v));
-// 同时只播一个
+document.querySelectorAll('video').forEach(v=>io.observe(v));
 document.addEventListener('play', e=>{
   document.querySelectorAll('video,audio').forEach(m=>{ if(m!==e.target) m.pause(); });
 }, true);
