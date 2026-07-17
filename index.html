@@ -4,63 +4,43 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>THE WORLD IS YOURS — Online Exhibition</title>
-<meta name="description" content="THE WORLD IS YOURS — multi-screen digital video, 8-channel sound installation. An exhibition you visit in the dark.">
+<meta name="description" content="THE WORLD IS YOURS — multi-screen digital video, 8-channel sound installation. Eleven films, eight voices, one sentence.">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
-<div id="cursor" aria-hidden="true"></div>
-<div id="walls" aria-hidden="true">
-  <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-    <rect x="8" y="10" width="84" height="80"/>
-    <path d="M8 62 L52 62 M60 62 L92 62"/>
-    <path d="M56 10 L56 40 M56 48 L56 62"/>
-    <path d="M70 40 L92 40"/>
-  </svg>
-</div>
-<div id="light" aria-hidden="true"></div>
-<div id="grain" aria-hidden="true"></div>
-
-<header id="enter">
-  <div class="braille" aria-hidden="true">⠠⠞⠓⠑⠀⠺⠕⠗⠇⠙⠀⠊⠎⠀⠽⠕⠥⠗⠎</div>
+<div id="splash" aria-hidden="true">
+  <div class="braille">⠠⠞⠓⠑⠀⠺⠕⠗⠇⠙⠀⠊⠎⠀⠽⠕⠥⠗⠎</div>
   <h1>THE WORLD IS YOURS</h1>
-  <div class="braille" aria-hidden="true">⠱⠆⠛⠑⠱⠆⠝⠊⠙⠢</div>
+  <div class="braille">⠱⠆⠛⠑⠱⠆⠝⠊⠙⠢</div>
   <div class="med">Multi-screen digital video · 8-channel sound installation</div>
-  <div class="doors">
-    <button id="enter-sound">ENTER WITH SOUND</button>
-    <button id="enter-silent">ENTER IN SILENCE</button>
-  </div>
-  <div class="hint">The room is dark. Move your light. Walk close to see.</div>
-</header>
+</div>
+<div id="grain" aria-hidden="true"></div>
+<div id="curtain" aria-hidden="true"></div>
 
-<main id="field" aria-label="Eleven films in a dark field"></main>
-
-<div class="corner" id="c-title">THE WORLD IS YOURS</div>
-<nav class="corner" id="c-lang" aria-label="Language"><span class="on">EN</span> · <a href="zh.html" lang="zh">中文</a></nav>
-<nav class="corner" id="c-about">
+<div class="chrome" id="brand">THE WORLD IS YOURS</div>
+<nav class="chrome" id="lang" aria-label="Language"><span class="on">EN</span> · <a href="zh.html" lang="zh">中文</a></nav>
+<button class="chrome" id="backidx">← INDEX</button>
+<nav class="chrome" id="menu">
   <button data-open="about">ABOUT</button>
   <button data-open="voices">EIGHT VOICES</button>
   <button data-open="onsite">ON SITE</button>
-  <button data-open="sentence" id="c-sent">THE SENTENCE →</button>
+  <button data-open="sentence">THE SENTENCE</button>
 </nav>
-<div class="corner" id="c-count">0 / 11</div>
-<div id="c-listen">STAND STILL TO LISTEN</div>
 
-<audio id="amb" loop preload="auto" src="assets/audio/eight_channels.mp3"></audio>
+<main id="index" aria-label="Eleven films"></main>
+<div id="prev" aria-hidden="true"><video muted loop playsinline preload="none"></video></div>
 
-<div id="viewer" role="dialog" aria-label="Film viewer">
-  <button class="x">CLOSE</button>
-  <button class="nav prev" aria-label="Previous">←</button>
-  <button class="nav next" aria-label="Next">→</button>
-  <div class="box">
-    <video controls playsinline preload="none"></video>
-    <div class="meta">
-      <div class="n"></div>
-      <div>
-        <div class="t"></div>
-        <div class="r"></div>
-      </div>
-    </div>
+<div id="watch" aria-label="Film viewer">
+  <div id="wstage"></div>
+  <div class="shade" aria-hidden="true"></div>
+  <div id="wnum" aria-hidden="true">01</div>
+  <div id="wmeta"><div class="t"></div><div class="r"></div></div>
+  <div id="wbar"></div>
+  <div id="whint">SCROLL / ← → TO CHANGE FILM</div>
+  <div id="warrows" aria-hidden="true">
+    <button id="wprev" style="left:0">prev</button>
+    <button id="wnext" style="right:0">next</button>
   </div>
 </div>
 
@@ -70,7 +50,7 @@
     <h2>About</h2>
     <p>We live, more than ever, on other people's experience. Reviews, guides, patient stories, podcasts, the advice of AI — personal experience is no longer private memory; it circulates day and night as content, evidence, care, and data. This circulation rests on an assumption we rarely examine: that experience can be spoken, heard, and handed over whole.</p>
     <p>Yet <b>understanding always begins from a partial position</b> — no one stands inside another's experience. <b>We know more than we can tell</b>; experience keeps a tacit remainder, and language carries only its surface. Understanding was never a handover. It is an ongoing negotiation: guessing, misreading, repairing — until, at some moment, someone says: <i>I think I understand.</i></p>
-    <p>We spent long hours with several blind and low-vision friends, asking them to describe their worlds, and translated those descriptions into moving images. They are not the subject of this work but its most honest case: the same negotiation happens in every act of telling and listening — and it is happening now, between you and this dark room.</p>
+    <p>We spent long hours with several blind and low-vision friends, asking them to describe their worlds, and translated those descriptions into moving images. They are not the subject of this work but its most honest case: the same negotiation happens in every act of telling and listening.</p>
     <p class="fine">The captions beside the films are the translators' second readings — not quotations. Some films combine the descriptions of several storytellers. They record how we listened, not what was said.<br><br>Medium: multi-screen digital video, 8-channel sound installation. The sound layer is complete in itself: for blind and low-vision visitors it is the entire work, and the images are its translation into light.<br><br>© THE WORLD IS YOURS. All films and recordings remain with their makers.</p>
   </div>
 </section>
@@ -79,8 +59,8 @@
   <button class="x">CLOSE</button>
   <div class="inner">
     <h2>Eight Voices</h2>
-    <p>Eight channels, eight corners of a dark room. The voices never pair with the screens: to see, you walk to an image; to listen, you stand where the channels balance. No position lets you do both at once.</p>
-    <p>Here, the same rule holds: <b>the voices surface only while you keep still.</b> Move your light, and they sink back into the dark. Every voice ends on the same sentence — the one this work is named after.</p>
+    <p>Eight channels, eight corners of a dark room. The voices never pair with the screens: to see, you walk to an image; to listen, you stand where the channels balance. Every voice ends on the same sentence — the one this work is named after.</p>
+    <audio controls preload="none" src="assets/audio/eight_channels.mp3"></audio>
     <p class="fine">Combined stereo reference of the eight channels, 11'09". In the room they play as eight independent sources.</p>
   </div>
 </section>
