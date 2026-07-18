@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE WORLD IS YOURS — Case Study</title>
+<meta name="description" content="Case study: THE WORLD IS YOURS / 世界是你的 — an exhibition on how understanding is negotiated when experience cannot be directly shared.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --paper:#faf9f5; --ink:#2b2a27; --gry:#6d6b64; --faint:#a5a29a;
+  --dk:#0a0a0c; --dink:#eae7de; --dsub:#8a877f; --amber:#d98f1f; --amberd:#e8a33d;
+  --line:#e2dfd6; --dline:#232328;
+  --serif:Georgia,'Songti SC','Noto Serif SC',serif;
+  --sans:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.8;
+  -webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--amber);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:980px;margin:0 auto;padding:0 24px}
+section{padding:12vh 0}
+.eyebrow{font-size:11px;letter-spacing:.34em;color:var(--amber);text-transform:uppercase;margin-bottom:.8em}
+.eyebrow::before{content:'';display:block;width:42px;height:2px;background:var(--amber);margin-bottom:2.2em}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(24px,3.4vw,34px);margin-bottom:1.2em;color:var(--ink)}
+.cn{color:var(--faint);font-size:.85em}
+p.lead{font-family:var(--serif);font-size:clamp(16px,1.9vw,19px);max-width:38em;color:#3d3b36;margin-bottom:1.4em}
+p.body{font-size:15px;max-width:44em;color:#4a4843;margin-bottom:1.2em}
+p.note{font-size:12.5px;color:var(--gry);max-width:44em;margin-top:1em}
+.dark{background:var(--dk);color:var(--dink)}
+.dark h2{color:var(--dink)}
+.dark p.lead{color:#c8c5bc}
+.dark p.body{color:#a5a29a}
+.dark p.note{color:var(--dsub)}
+.dark .eyebrow{color:var(--amberd)}
+.dark .eyebrow::before{background:var(--amberd)}
+figure{margin:3em 0}
+figcaption{font-size:12px;color:var(--gry);margin-top:.9em;letter-spacing:.04em}
+.dark figcaption{color:var(--dsub)}
+.frame{border:1px solid var(--line)}
+.dark .frame{border-color:var(--dline)}
+
+/* hero */
+#hero{background:var(--dk);color:var(--dink);min-height:92vh;display:flex;
+  flex-direction:column;justify-content:center;text-align:center;padding:14vh 24px}
+#hero .braille{font-size:clamp(13px,1.9vw,17px);letter-spacing:.5em;color:var(--dsub);margin:.8em 0}
+#hero h1{font-weight:200;font-size:clamp(30px,6vw,60px);letter-spacing:.26em;text-indent:.26em;margin:.3em 0 .1em}
+#hero .zh{font-size:clamp(16px,2.6vw,24px);letter-spacing:.85em;text-indent:.85em;font-weight:300}
+#hero .sub{font-family:var(--serif);font-style:italic;color:var(--dsub);margin-top:3em;font-size:15px}
+#hero .meta{display:flex;gap:4em;justify-content:center;flex-wrap:wrap;margin-top:6vh;text-align:left}
+#hero .meta div{font-size:11px;letter-spacing:.14em;color:var(--dsub);line-height:2}
+#hero .meta b{display:block;color:var(--amberd);font-weight:400;letter-spacing:.28em;font-size:10px}
+
+/* grids */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:760px){.grid2,.grid3,.grid4{grid-template-columns:1fr 1fr}}
+
+/* film grid */
+.films{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:3em}
+@media(max-width:760px){.films{grid-template-columns:repeat(2,1fr)}}
+.film em{display:block;font-style:normal;font-size:11px;letter-spacing:.1em;color:var(--dsub);margin-top:.7em}
+.film .rd{font-family:var(--serif);font-style:italic;font-size:12px;color:#8f8c84;line-height:1.7;margin-top:.3em}
+
+/* taxonomy */
+.tax{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:3em 0}
+@media(max-width:760px){.tax{grid-template-columns:1fr 1fr}}
+.tax div{background:var(--paper);padding:1.6em 1.4em}
+.tax b{font-family:var(--serif);font-weight:400;font-size:16px;display:block;margin-bottom:.5em}
+.tax span{font-size:12.5px;color:var(--gry);line-height:1.7;display:block}
+
+/* pull quote */
+.pull{font-family:var(--serif);font-size:clamp(19px,2.6vw,26px);line-height:1.8;color:#3d3b36;
+  max-width:30em;margin:2em 0;padding-left:1.2em;border-left:2px solid var(--amber)}
+.pull small{display:block;font-size:12px;color:var(--gry);margin-top:1em;font-family:var(--sans)}
+
+/* light script strip */
+.script{display:flex;margin:3em 0;border:1px solid var(--line)}
+.script div{flex:1;padding:1.4em 1em;font-size:11.5px;letter-spacing:.1em;line-height:1.9}
+.script .s1{background:#3a3a40;color:#cfccc3}
+.script .s2{background:#0b0b0d;color:#8f8c84}
+.script .s3{background:#232228;color:#b5b2a9}
+.script .s4{background:#f0e9da;color:#4a4843}
+.script b{display:block;font-size:13px;letter-spacing:.2em;font-weight:400}
+.script .s4 b{color:#8a6524}.script .s1 b,.script .s2 b,.script .s3 b{color:#e8a33d}
+
+/* footer */
+footer{background:var(--dk);color:var(--dsub);text-align:center;padding:16vh 24px}
+footer .line{font-family:var(--serif);font-size:clamp(20px,3.2vw,30px);color:#f6f3e8;
+  text-shadow:0 0 16px rgba(246,243,232,.4);margin:.6em 0}
+footer .braille{letter-spacing:.5em;font-size:14px;margin:1em 0}
+footer .fine{font-size:11.5px;letter-spacing:.1em;margin-top:5em;line-height:2}
+</style>
+</head>
+<body>
+
+<header id="hero">
+  <div class="braille">⠠⠞⠓⠑⠀⠺⠕⠗⠇⠙⠀⠊⠎⠀⠽⠕⠥⠗⠎</div>
+  <h1>THE WORLD IS YOURS</h1>
+  <div class="zh">世界是你的</div>
+  <div class="braille">⠱⠆⠛⠑⠱⠆⠝⠊⠙⠢</div>
+  <p class="sub">an exhibition on how understanding is negotiated<br>when experience cannot be directly shared</p>
+  <div class="meta">
+    <div><b>ROLE</b>concept · research<br>translation · spatial design</div>
+    <div><b>MEDIUM</b>multi-screen digital video<br>8-channel sound installation</div>
+    <div><b>VENUE</b>Warehouse XI<br>Somerville MA · 300 sqm</div>
+    <div><b>YEAR</b>2024 work<br>2026 exhibition design</div>
+  </div>
+</header>
+
+<section class="wrap" id="question">
+  <div class="eyebrow">01 · Research Question</div>
+  <h2>When experience cannot be directly shared,<br>how is understanding negotiated?</h2>
+  <p class="lead">We live, more than ever, on other people's experience — reviews, guides, patient stories, the advice of AI. This circulation rests on an assumption we rarely examine: that experience can be spoken, heard, and handed over whole.</p>
+  <p class="body">Yet understanding always begins from a partial position. We know more than we can tell; language carries only the surface of experience. Understanding was never a handover — it is an ongoing negotiation: guessing, misreading, repairing, until someone says: <i>I think I understand.</i> This project asks how design can reveal, support, or disturb that negotiation — and stages the question with the people for whom it is most unavoidable.</p>
+  <p class="note">当感知经验无法被直接共享时，设计如何揭示、支持或扰动人们协商理解的过程？</p>
+</section>
+
+<section class="wrap" id="research">
+  <div class="eyebrow">02 · Field Research</div>
+  <h2>Everyone lives on second-hand experience —<br>and the handover always leaks <span class="cn">实采 N=15+23</span></h2>
+  <p class="body">Short interviews (N=15) and a bilingual micro-survey (N=23), field-collected in July 2026, asked people not what they believe about understanding but what happened <i>the last time</i> they depended on someone else's experience.</p>
+  <figure><img class="frame" src="img/chart_tiles.jpg" alt="Headline tiles: 90% rely on second-hand experience weekly; 85% experienced transfer failure; 60% felt the gap behind 'I understand you'."></figure>
+  <div style="max-width:760px;display:grid;gap:20px">
+    <figure style="margin:0"><img class="frame" src="img/chart_q6.jpg" alt="Chart: emotions are the hardest thing to describe (70%)."></figure>
+    <figure style="margin:0"><img class="frame" src="img/chart_q34.jpg" alt="Chart: 85% report transfer failure between what was said and what was heard."></figure>
+    <figure style="margin:0"><img class="frame" src="img/chart_q7.jpg" alt="Chart: 60% report a gap behind 'I understand you'."></figure>
+  </div>
+  <p class="body" style="margin-top:2.5em">The interviews yielded a taxonomy: understanding does not simply succeed or fail — it <b>ends</b>, in one of six ways.</p>
+  <div class="tax">
+    <div><b>“I think I understand.”</b><span>我好像懂了 — the negotiated good-enough ending.</span></div>
+    <div><b>“Forget it.”</b><span>算了 — the invisible endpoint: giving up on being understood.</span></div>
+    <div><b>Agree to differ</b><span>求同存异 — negotiating an end to negotiation.</span></div>
+    <div><b>Pretend to understand</b><span>假装了解 — the social performance of understanding.</span></div>
+    <div><b>Look it up later</b><span>事后自修 — understanding delayed and privatised.</span></div>
+    <div><b>“As long as you're happy.”</b><span>祝福性搁置 — ending negotiation with a blessing.</span></div>
+  </div>
+  <div class="pull">"What honey tastes like — I'd say it's sweet like sugar, but the small part that isn't sugar is usually the part that matters."
+    <small>P13 · the good-enough theory of understanding, from the field 蜂蜜的甜与蔗糖的甜</small></div>
+</section>
+
+<section class="dark" id="work">
+  <div class="wrap">
+    <div class="eyebrow">03 · The Work</div>
+    <h2>Eleven films grown from spoken worlds <span class="cn">原作 · 2024</span></h2>
+    <p class="lead">We asked blind and low-vision friends to describe their worlds, then translated those descriptions into moving images. In the room, the films are the size of a hand; eight voices fill the dark from eight corners; every voice ends on the same sentence.</p>
+    <figure><img class="frame" src="img/install.jpg" alt="Installation views: small screens in a blackout hall, fractured-glyph neon in a corner, and the sentence as a white floor neon.">
+      <figcaption>Installation views — multi-screen digital video, 8-channel sound installation; fractured-glyph neon; the sentence as a white neon resting on the floor.</figcaption></figure>
+    <div class="films">
+      <div class="film"><img class="frame" src="img/film01.jpg" alt=""><em>01 · The Crane and the Moon</em><div class="rd">Someone described the moon as near enough to install. So we hung it.</div></div>
+      <div class="film"><img class="frame" src="img/film02.jpg" alt=""><em>02 · The Threshold</em><div class="rd">The border between said and understood keeps moving.</div></div>
+      <div class="film"><img class="frame" src="img/film03.jpg" alt=""><em>03 · Brightness That Refuses</em><div class="rd">A brightness that forces the eyes shut.</div></div>
+      <div class="film"><img class="frame" src="img/film04.jpg" alt=""><em>04 · A Cathedral Overheard</em><div class="rd">Built from adjectives overheard.</div></div>
+      <div class="film"><img class="frame" src="img/film05.jpg" alt=""><em>05 · Steles in Fog</em><div class="rd">Remembering how it feels is enough.</div></div>
+      <div class="film"><img class="frame" src="img/film06.jpg" alt=""><em>06 · Assemblage at Dusk</em><div class="rd">None of the sentences is whole; together they resemble a home.</div></div>
+      <div class="film"><img class="frame" src="img/film07.jpg" alt=""><em>07 · The Wire Sphere</em><div class="rd">It burns, wrapped in wire; it stays lit.</div></div>
+      <div class="film"><img class="frame" src="img/film08.jpg" alt=""><em>08 · A Planet on No Map</em><div class="rd">It is wherever you say it is.</div></div>
+      <div class="film"><img class="frame" src="img/film09.jpg" alt=""><em>09 · The Doorway</em><div class="rd">Seeing was never something we could finish on her behalf.</div></div>
+      <div class="film"><img class="frame" src="img/film10.jpg" alt=""><em>10 · Two Cats</em><div class="rd">Neither explains orange to the other.</div></div>
+      <div class="film"><img class="frame" src="img/film11.jpg" alt=""><em>11 · Daytime Through Paper</em><div class="rd">We placed the camera inside the paper, too.</div></div>
+    </div>
+    <p class="note" style="margin-top:2.5em">The captions are the translators' second readings — not quotations. Some films combine the descriptions of several storytellers. They record how we listened, not what was said. 影像旁文字为转译者再读，非讲述者原话。</p>
+  </div>
+</section>
+
+<section class="wrap" id="design">
+  <div class="eyebrow">04 · Exhibition Design</div>
+  <h2>Four halls, one light script <span class="cn">四区 · 一套光线剧本</span></h2>
+  <p class="body">The exhibition translates the negotiation into a route. Light falls and returns: a dim buffer with the foreword; a blackout star field where eleven films hang at hand-height on stands; a low-lit echo hall with a braille sentence wall, interview footage, and a card you take but cannot read; a bright lounge where the card — and the sentence — are finally read.</p>
+  <div class="script">
+    <div class="s1"><b>1 · BUFFER</b>dim 微光<br>foreword wall</div>
+    <div class="s2"><b>2 · STAR FIELD</b>blackout 全黑<br>15 screens · 8 voices</div>
+    <div class="s3"><b>3 · ECHO</b>low 昏暗<br>braille wall · cards</div>
+    <div class="s4"><b>4 · LOUNGE</b>bright 明亮<br>reading the card</div>
+  </div>
+  <figure><img class="frame" src="img/plan_light.jpg" alt="Exhibition floor plan: four zones, fifteen screens, eight channels, braille wall, final route.">
+    <figcaption>Floor plan — Warehouse XI, Somerville. Geometry extracted from the author's CAD; fifteen screen positions, eight channels, two original neon works, final route.</figcaption></figure>
+  <div class="grid2">
+    <figure><img class="frame" src="img/axono.jpg" alt="Axonometric drawing of the exhibition build."><figcaption>Axonometric — walls extruded from the same CAD; route identical to plan.</figcaption></figure>
+    <figure><img class="frame" src="img/zone_elev.jpg" alt="Interior elevations of halls 1 to 3."><figcaption>Hall elevations — foreword panel · screen heights · braille wall 1.05–1.38 m.</figcaption></figure>
+  </div>
+  <figure><img class="frame" src="img/see_hear.jpg" alt="Diagram: seeing and hearing must be negotiated separately.">
+    <figcaption>Seeing &amp; hearing apart — from any position, the image you can read and the voices you can distinguish arrive from different places.</figcaption></figure>
+</section>
+
+<section class="dark" id="renders">
+  <div class="wrap">
+    <div class="eyebrow">05 · The Rooms</div>
+    <h2>Walking the light script <span class="cn">效果图</span></h2>
+    <figure><img class="frame" src="img/render_overview.jpg" alt="Overview render: four halls, one light script."><figcaption>Exhibition overview — four halls, one light script. Digital visualization from the layout data · not a photograph.</figcaption></figure>
+    <div class="grid2">
+      <figure><img class="frame" src="img/render_starfield_scene.jpg" alt="Star field scene render"><figcaption>Hall 2 · Star Field</figcaption></figure>
+      <figure><img class="frame" src="img/render_starfield_eye.jpg" alt="Star field at eye level"><figcaption>Hall 2 · eye level</figcaption></figure>
+      <figure><img class="frame" src="img/render_buffer.jpg" alt="Buffer hall render"><figcaption>Hall 1 · Buffer, foreword wall</figcaption></figure>
+      <figure><img class="frame" src="img/render_echo.jpg" alt="Echo hall render"><figcaption>Hall 3 · Echo — braille wall, projection, cards</figcaption></figure>
+    </div>
+    <figure><img class="frame" src="img/render_lounge.jpg" alt="Lounge render, bright."><figcaption>Hall 4 · Lounge — reading the card in full light.</figcaption></figure>
+  </div>
+</section>
+
+<section class="wrap" id="objects">
+  <div class="eyebrow">06 · The Card</div>
+  <h2>Taken in the dark, read in the light <span class="cn">小卡机制</span></h2>
+  <p class="lead">The exhibition's only takeaway is a card you cannot read where you receive it: braille embossed on the front, ink on the back. Picked up in the dim echo hall, opened in the bright lounge — a pocket-size rehearsal of negotiated understanding.</p>
+  <p class="body">Alongside it: a braille-embossed ticket, an A6 guidebook with braille pages bound beside ink pages, and the two original neon works placed back into the route — the fractured glyphs at the buffer's exit, the white floor neon at the foot of the braille wall. Braille production passes three gates with blind collaborators: grade decision, proofreading, and tactile sign-off on physical proofs.</p>
+</section>
+
+<section class="dark" id="online">
+  <div class="wrap">
+    <div class="eyebrow">07 · Online Exhibition</div>
+    <h2>The films, one at a time <span class="cn">线上展览</span></h2>
+    <p class="lead">A web version rebuilt in web-native language: a typographic index of eleven films with cursor-following previews; each opens into a fullscreen, one-film-at-a-time viewing mode with slow crossfades. The eight voices and the sentence keep their own rooms.</p>
+    <p class="body">→ <a href="https://github.com/acrux-yueyao/wis">github.com/acrux-yueyao/wis</a> · deployed via Vercel</p>
+  </div>
+</section>
+
+<footer>
+  <div class="braille">⠠⠞⠓⠑⠀⠺⠕⠗⠇⠙⠀⠊⠎⠀⠽⠕⠥⠗⠎</div>
+  <div class="line">The world is yours. 世界是你的。</div>
+  <div class="braille">⠱⠆⠛⠑⠱⠆⠝⠊⠙⠢</div>
+  <p style="font-family:var(--serif);font-style:italic;max-width:34em;margin:2.5em auto 0;font-size:14px">It may be a gift, a trust handed over, or the version least likely to be misunderstood. We cannot tell which — and the exhibition refuses to decide.</p>
+  <div class="fine">Multi-screen digital video · 8-channel sound installation · Warehouse XI, Somerville<br>
+  The sound layer is complete in itself: for blind and low-vision visitors it is the entire work.<br>
+  © THE WORLD IS YOURS · Negotiated Understanding</div>
+</footer>
+
+</body>
+</html>
