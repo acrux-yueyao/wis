@@ -72,6 +72,17 @@ figcaption{font-size:12px;color:var(--gry);margin-top:.9em;letter-spacing:.04em}
 .tax b{font-family:var(--serif);font-weight:400;font-size:16px;display:block;margin-bottom:.5em}
 .tax span{font-size:12.5px;color:var(--gry);line-height:1.7;display:block}
 
+/* literature */
+.lit{margin:3.5em 0 0;border-top:1px solid var(--line)}
+.lit-row{display:flex;gap:2.4em;padding:1.3em 0;border-bottom:1px solid var(--line);align-items:baseline}
+.lit-row .stat{font-family:var(--serif);font-size:26px;color:var(--amber);min-width:3.2em}
+.lit-row .t{flex:1}
+.lit-row .claim{font-size:14.5px;color:#3d3b36;max-width:40em}
+.lit-row .src{font-size:12px;color:var(--gry);margin-top:.3em}
+.lit-row .src a{color:var(--gry);text-decoration:underline;text-decoration-color:var(--line)}
+.lit-row .src a:hover{color:var(--amber)}
+@media(max-width:640px){.lit-row{flex-direction:column;gap:.4em}}
+
 /* pull quote */
 .pull{font-family:var(--serif);font-size:clamp(19px,2.6vw,26px);line-height:1.8;color:#3d3b36;
   max-width:30em;margin:2em 0;padding-left:1.2em;border-left:2px solid var(--amber)}
@@ -128,6 +139,32 @@ footer .fine{font-size:11.5px;letter-spacing:.1em;margin-top:5em;line-height:2}
     <figure style="margin:0"><img class="frame" src="img/chart_q34.jpg" alt="Chart: 85% report transfer failure between what was said and what was heard."></figure>
     <figure style="margin:0"><img class="frame" src="img/chart_q7.jpg" alt="Chart: 60% report a gap behind 'I understand you'."></figure>
   </div>
+  <h2 style="margin-top:2.2em;font-size:clamp(20px,2.6vw,26px)">The pattern is not ours alone <span class="cn">文献同样如此</span></h2>
+  <p class="body">Representative surveys and controlled experiments find the same condition our field data points to: everyone lives on second-hand experience, and the handover leaks systematically.</p>
+  <div class="lit">
+    <div class="lit-row"><div class="stat">82%</div><div class="t">
+      <div class="claim">of U.S. adults at least sometimes read online reviews before buying something new; 40% almost always do.</div>
+      <div class="src">Pew Research Center, <a href="https://www.pewresearch.org/internet/2016/12/19/online-reviews/">Online Reviews</a>, 2016 · N=4,787 — alongside our 90% (field, N=20)</div></div></div>
+    <div class="lit-row"><div class="stat">72%</div><div class="t">
+      <div class="claim">of internet users looked online for health information in the past year — other people's illness, told as experience.</div>
+      <div class="src">Pew Research Center, <a href="https://www.pewresearch.org/internet/2013/01/15/health-online-2013/">Health Online 2013</a></div></div></div>
+    <div class="lit-row"><div class="stat">34%</div><div class="t">
+      <div class="claim">of U.S. adults have used ChatGPT — experience now arrives second-hand through a model as well.</div>
+      <div class="src">Pew Research Center, <a href="https://www.pewresearch.org/short-reads/2025/06/25/34-of-us-adults-have-used-chatgpt-about-double-the-share-in-2023/">June 2025</a> · N=5,123 — alongside our 60% who asked AI for everyday advice</div></div></div>
+    <div class="lit-row"><div class="stat">72→61</div><div class="t">
+      <div class="claim">Speakers believed their meaning got through 72% of the time; listeners actually understood 61%. Overestimating understanding is the norm, not a personal failure.</div>
+      <div class="src">Keysar &amp; Henly, <a href="https://journals.sagepub.com/doi/abs/10.1111/1467-9280.00439">Speakers' Overestimation of Their Effectiveness</a>, <i>Psychological Science</i>, 2002 — alongside our 60% who feel the gap behind “I understand you”</div></div></div>
+    <div class="lit-row"><div class="stat">≈</div><div class="t">
+      <div class="claim">Couples communicate no more accurately than strangers — but are far more confident that they do. The closer we are, the less we explain.</div>
+      <div class="src">Savitsky, Keysar, Epley, Carter &amp; Swanson, <a href="https://www.sciencedirect.com/science/article/abs/pii/S0022103110002118">The closeness-communication bias</a>, <i>JESP</i>, 2011 — the laboratory version of our interviewees' “forget it”, said to the people closest to them</div></div></div>
+    <div class="lit-row"><div class="stat">×25</div><div class="t">
+      <div class="claim">Across 25 experiments, imagining another's perspective did not increase accuracy — it often lowered it. What worked was <b>getting</b> their perspective: asking, listening, conversing.</div>
+      <div class="src">Eyal, Steffel &amp; Epley, <a href="https://www.researchgate.net/publication/324232939_Perspective_mistaking_Accurately_understanding_the_mind_of_another_requires_getting_perspective_not_taking_perspective">Perspective Mistaking</a>, <i>JPSP</i>, 2018 — the experimental case for understanding as negotiation, not projection</div></div></div>
+    <div class="lit-row"><div class="stat">2.2B</div><div class="t">
+      <div class="claim">2.2 billion people worldwide live with vision impairment (WHO); over one million blind and low-vision users are connected to ten million sighted volunteers who describe the world to them by live video.</div>
+      <div class="src"><a href="https://www.who.int/publications-detail-redirect/world-report-on-vision">WHO, World Report on Vision, 2019</a> · <a href="https://www.bemyeyes.com/news/be-my-eyes-reaches-1-million-blind-and-low-vision-users-and-10-million-volunteers/">Be My Eyes, 2026</a> — the labor of description, already at planetary scale</div></div></div>
+  </div>
+  <p class="note">Field data (N=15+23, July 2026) is a small qualitative sample; the surveys and experiments above are representative or controlled. The two layers are shown side by side, never interchanged. 自采为小样本定性指示，外部为代表性样本与受控实验——两层并置，不互相冒充。</p>
   <p class="body" style="margin-top:2.5em">The interviews yielded a taxonomy: understanding does not simply succeed or fail — it <b>ends</b>, in one of six ways.</p>
   <div class="tax">
     <div><b>“I think I understand.”</b><span>The negotiated, good-enough ending.</span></div>
