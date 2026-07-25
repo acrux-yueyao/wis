@@ -8,10 +8,12 @@
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
+<a class="skip" href="#index">Skip to the eleven films</a>
+<h1 class="sr">THE WORLD IS YOURS — eleven films, eight voices, one sentence. An online exhibition.</h1>
 
 <div id="splash" aria-hidden="true">
   <div class="braille">⠠⠞⠓⠑⠀⠺⠕⠗⠇⠙⠀⠊⠎⠀⠽⠕⠥⠗⠎</div>
-  <h1>THE WORLD IS YOURS</h1>
+  <div class="h1">THE WORLD IS YOURS</div>
   <div class="braille">⠱⠆⠛⠑⠱⠆⠝⠊⠙⠢</div>
   <div class="med">Multi-screen digital video · 8-channel sound installation</div>
 </div>
@@ -26,6 +28,7 @@
   <button data-open="voices">EIGHT VOICES</button>
   <button data-open="onsite">ON SITE</button>
   <button data-open="sentence">THE SENTENCE</button>
+  <button data-open="access">ACCESS</button>
   <a href="case/">CASE STUDY</a>
 </nav>
 
@@ -36,12 +39,12 @@
   <div id="wstage"></div>
   <div class="shade" aria-hidden="true"></div>
   <div id="wnum" aria-hidden="true">01</div>
-  <div id="wmeta"><div class="t"></div><div class="r"></div></div>
+  <div id="wmeta" aria-live="polite"><div class="t"></div><div class="r"></div></div>
   <div id="wbar"></div>
   <div id="whint">SCROLL / ← → TO CHANGE FILM</div>
-  <div id="warrows" aria-hidden="true">
-    <button id="wprev" style="left:0">prev</button>
-    <button id="wnext" style="right:0">next</button>
+  <div id="warrows">
+    <button id="wprev" style="left:0" aria-label="Previous film">prev</button>
+    <button id="wnext" style="right:0" aria-label="Next film">next</button>
   </div>
 </div>
 
@@ -61,8 +64,8 @@
   <div class="inner">
     <h2>Eight Voices</h2>
     <p>Eight channels, eight corners of a dark room. The voices never pair with the screens: to see, you walk to an image; to listen, you stand where the channels balance. Every voice ends on the same sentence — the one this work is named after.</p>
-    <audio controls preload="none" src="assets/audio/eight_channels.mp3"></audio>
-    <p class="fine">Combined stereo reference of the eight channels, 11'09". In the room they play as eight independent sources.</p>
+    <audio controls preload="none" src="assets/audio/eight_channels.mp3" aria-label="Eight voices — combined stereo reference, 11 minutes 9 seconds, in Mandarin Chinese"></audio>
+    <p class="fine">Combined stereo reference of the eight channels, 11'09", in Mandarin Chinese. In the room they play as eight independent sources. Every voice ends on the same sentence: <i lang="zh">世界是你的</i> — the world is yours. A full transcript with English translation is in preparation; see ACCESS.</p>
   </div>
 </section>
 
@@ -82,6 +85,18 @@
     <div class="line">The world is yours.</div>
     <div class="bb" aria-hidden="true">⠱⠆⠛⠑⠱⠆⠝⠊⠙⠢</div>
     <p class="why">It may be a gift. It may be a trust handed over. It may simply be the version least likely to be misunderstood. We cannot tell which — and this work refuses to decide.</p>
+  </div>
+</section>
+
+<section class="veil" id="access" role="dialog" aria-label="Accessibility">
+  <button class="x">CLOSE</button>
+  <div class="inner">
+    <h2>Access</h2>
+    <p>This work was made with blind and low-vision collaborators, and this page is meant to be read with a screen reader as well as with eyes.</p>
+    <p><b>The films are silent.</b> Each film carries a written reading — the translators' second reading of a spoken description — available as text in the index and beside each film. The readings are the films' text alternative, not captions of dialogue: there is no dialogue.</p>
+    <p><b>The sound layer is complete in itself.</b> The eight voices (Mandarin Chinese, 11'09") are the entire work for blind and low-vision visitors; the images are their translation into light. A full transcript with English translation is in preparation and will be published on this page.</p>
+    <p><b>Navigation.</b> All films can be opened from the list with Enter; in the viewer, arrow keys change films and Escape returns to the index. Animations are reduced automatically if your system asks for reduced motion.</p>
+    <p class="fine">Interview consent and exhibition-playback consent were collected separately; storytellers keep veto power over the finished films. Blind collaborators are credited, compensated co-creators. If anything on this page is hard to reach with your assistive technology, please tell us — nikkiyao@bu.edu.</p>
   </div>
 </section>
 

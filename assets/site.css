@@ -19,9 +19,9 @@ button{background:none;border:none;color:inherit;font:inherit;cursor:pointer}
   transition:opacity 1.4s ease .2s;pointer-events:none;padding:0 20px}
 body.ready #splash{opacity:0}
 #splash .braille{font-size:clamp(12px,1.8vw,17px);letter-spacing:.5em;color:var(--sub);margin:.8em 0}
-#splash h1{font-weight:200;font-size:clamp(24px,5vw,50px);letter-spacing:.3em;text-indent:.3em;
+#splash .h1{font-weight:200;font-size:clamp(24px,5vw,50px);letter-spacing:.3em;text-indent:.3em;
   opacity:0;animation:srise 1.6s .2s ease forwards}
-#splash h1.zh{letter-spacing:.7em;text-indent:.7em}
+#splash .h1.zh{letter-spacing:.7em;text-indent:.7em}
 @keyframes srise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 #splash .med{color:var(--sub);font-size:12px;letter-spacing:.18em;margin-top:2em;
   opacity:0;animation:srise 1.6s .7s ease forwards}
@@ -131,4 +131,16 @@ html[lang=zh] #sentence .why{font-style:normal}
   #prev{display:none}
   #menu{gap:1.6em}
   #index{padding-top:16vh}
+}
+
+/* ---------- accessibility ---------- */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.skip{position:fixed;left:16px;top:-60px;z-index:400;background:#e8a33d;color:#0a0a0c;padding:.6em 1em;
+  font-size:12px;letter-spacing:.12em;text-decoration:none;transition:top .2s}
+.skip:focus{top:16px}
+:focus-visible{outline:2px solid #e8a33d;outline-offset:3px}
+.row:focus-visible{outline-offset:6px}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  #prev{display:none!important}
 }

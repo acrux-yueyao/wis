@@ -43,12 +43,16 @@ const idx = document.getElementById('index');
 const prev = document.getElementById('prev');
 const pv = prev ? prev.querySelector('video') : null;
 const seen = new Set();
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const rows = T.films.map((f,i)=>{
   const r = document.createElement('div');
   r.className='row';
+  r.setAttribute('role','button'); r.setAttribute('tabindex','0');
+  r.setAttribute('aria-label',(L==='zh'?`影片 ${NN(i)} · ${f[0]} · ${f[2]} — 打开观看`:`Film ${NN(i)} — ${f[0]}, ${f[2]}. Open viewer.`));
   r.style.transitionDelay = (0.06*i)+'s';
   r.innerHTML = `<span class="n">${NN(i)}</span><span class="ti">${f[0]}</span><span class="dur">${f[2]}"</span>`;
-  if(matchMedia('(hover:hover)').matches && pv){
+  r.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); enterWatch(i); } });
+  if(matchMedia('(hover:hover)').matches && pv && !RM){
     r.addEventListener('mouseenter',()=>{
       pv.src = `assets/video/film${NN(i)}.mp4`;
       pv.play().catch(()=>{});
@@ -61,7 +65,7 @@ const rows = T.films.map((f,i)=>{
   return r;
 });
 /* preview follows cursor */
-if(pv){
+if(pv && !RM){
   let px=0,py=0,tx=0,ty=0;
   addEventListener('mousemove',e=>{tx=e.clientX+34;ty=e.clientY-104;});
   (function anim(){
@@ -114,8 +118,10 @@ function exitWatch(){
   curtain.classList.add('on');
   setTimeout(()=>{
     watching=false; document.body.classList.remove('watching');
+    const back=cur;
     if(cur>=0){ slides[cur].classList.remove('on'); slides[cur].querySelector('video').pause(); cur=-1; }
     curtain.classList.remove('on');
+    if(back>=0 && rows[back]) rows[back].focus();
   }, 480);
 }
 document.getElementById('backidx').addEventListener('click',exitWatch);
@@ -137,12 +143,20 @@ addEventListener('keydown',e=>{
 });
 
 /* ---------- veils ---------- */
+let veilOpener=null;
 function closeVeils(){ document.querySelectorAll('.veil.open').forEach(v=>{
   v.classList.remove('open');
+  v.setAttribute('aria-modal','false');
   v.querySelectorAll('audio').forEach(a=>a.pause());
-});}
+});
+  if(veilOpener){ veilOpener.focus(); veilOpener=null; }
+}
 document.querySelectorAll('[data-open]').forEach(b=>{
-  b.addEventListener('click',()=>{ closeVeils(); document.getElementById(b.dataset.open).classList.add('open'); });
+  b.addEventListener('click',()=>{ closeVeils(); veilOpener=b;
+    const v=document.getElementById(b.dataset.open);
+    v.classList.add('open'); v.setAttribute('aria-modal','true');
+    const x=v.querySelector('.x'); if(x) x.focus();
+  });
 });
 document.querySelectorAll('.veil .x').forEach(x=>x.addEventListener('click',closeVeils));
 })();
