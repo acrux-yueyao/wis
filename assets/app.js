@@ -13,7 +13,7 @@ const T = {
    ["The Wire Sphere","The thing inside can't be explained — only that it burns, and that wire wraps around it. The plain is vast, the antenna thin, the fire small; it stays lit.","0'46"],
    ["A Planet on No Map","The world he spoke of is on no map. Fine — give it a glowing horizon and a few yellow moons. It is wherever you say it is.","0'54"],
    ["The Doorway","She stands in the doorway; beyond it, a sky described to her a thousand times. Her back is to us — seeing was never something we could finish on her behalf.","1'31"],
-   ["Two Cats","Two cats on a white city, watching the sun go down. Neither explains orange to the other. Some company precedes understanding, and asks for none.","0'50"],
+   ["Three Cats","Three cats on a white city — a kitten between two grown ones — watching the sun go down. No one explains orange to anyone. Some company precedes understanding, and asks for none.","0'50"],
    ["Daytime Through Paper","The whole world gauzed in yellow, like light seen through paper. He said: this is my daytime. So we placed the camera inside the paper, too.","1'00"]],
   hint:"SCROLL / ← → TO CHANGE FILM"
  },
@@ -28,7 +28,7 @@ const T = {
    ["原野上的线团","心里的那团东西说不清楚，只能说它在烧，外面缠着线。原野很大，天线很细，火很小，但一直亮着。","0'46"],
    ["不在地图上的行星","他说的世界不在地图上。好——那就给它一条发光的地平线，几颗黄色的月亮。你说它在哪里，它就在哪里。","0'54"],
    ["门框里的背影","她站在门里，门外是别人替她描述过一千次的天空。她背对我们——因为看见，从来不是我们能替她完成的事。","1'31"],
-   ["两只猫","两只猫坐在白色的城市上看落日。它们不需要向对方解释橙色。有些陪伴先于理解，也不索取理解。","0'50"],
+   ["三只猫","三只猫坐在白色的城市上看落日，中间是一只小猫。没有谁向谁解释橙色。有些陪伴先于理解，也不索取理解。","0'50"],
    ["隔着纸的白天","整个世界蒙上一层黄，像隔着一张纸看光。他说：这就是我的白天。我们把摄影机也放进了那张纸里。","1'00"]],
   hint:"滚 动 / ← → 切 换"
  }
