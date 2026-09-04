@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Curation — THE WORLD IS YOURS</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/tell.css">
+</head>
+<body class="ready">
+<div id="grain" aria-hidden="true"></div>
+<a class="chrome" id="brand" href="../">THE WORLD IS YOURS</a>
+<main class="ad">
+  <h1>策展审核 · Curation</h1>
+  <div class="tok"><input type="password" id="tok" placeholder="admin token" style="flex:1"><button id="go" class="send" style="margin:0">载 入</button></div>
+  <p class="note">流程：pending → 通过(approve) 后进入公开故事墙与装置模式；生成画面后把图片地址填进 image 保存。隐藏(hide)不删除；删除(delete)不可恢复（撤回申请用这个）。</p>
+  <div class="list" id="list"></div>
+</main>
+<script>
+(function(){
+  const $=s=>document.querySelector(s); const list=$('#list');
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  $('#tok').value=sessionStorage.getItem('wis_admin')||'';
+  async function api(body){
+    const r=await fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json','x-admin-token':$('#tok').value},body:JSON.stringify(body)});
+    const j=await r.json(); if(!r.ok) throw new Error(j.error||r.status); return j;
+  }
+  async function load(){
+    sessionStorage.setItem('wis_admin',$('#tok').value);
+    try{
+      const {stories}=await api({action:'list'});
+      list.innerHTML=stories.length?stories.map(s=>`
+        <div class="it" data-id="${s.id}">
+          <div>
+            <div class="st ${s.status}">${s.status}</div>
+            <div class="txt">${esc(s.text)}</div>
+            <div class="meta">${s.id} · ${s.initials?esc(s.initials):'anon'} · ${s.lang} · ${new Date(s.createdAt).toLocaleString()} ${s.email?'· '+esc(s.email):''}</div>
+            ${s.image?`<img src="${esc(s.image)}" alt="">`:''}
+            <input type="text" class="img" placeholder="image url (e.g. /stories/img/${s.id}.jpg)" value="${esc(s.image||'')}" style="width:100%;margin-top:.8em">
+            <input type="text" class="alt" placeholder="alt text for the image" value="${esc(s.alt||'')}" style="width:100%;margin-top:.4em">
+          </div>
+          <div class="ops">
+            <button data-a="approve">通过 · approve</button>
+            <button data-a="hide">隐藏 · hide</button>
+            <button data-a="setimage">保存图片 · save image</button>
+            <button data-a="delete">删除 · delete</button>
+          </div>
+        </div>`).join(''):'<p class="note">还没有投稿。</p>';
+    }catch(e){ list.innerHTML='<p class="note">'+esc(e.message)+'</p>'; }
+  }
+  $('#go').addEventListener('click',load);
+  list.addEventListener('click',async e=>{
+    const b=e.target.closest('button[data-a]'); if(!b) return;
+    const it=b.closest('.it'); const id=it.dataset.id; const a=b.dataset.a;
+    if(a==='delete' && !confirm('删除后不可恢复，确定？')) return;
+    const body={action:a,id};
+    if(a==='setimage'){ body.image=it.querySelector('.img').value.trim(); body.alt=it.querySelector('.alt').value.trim(); }
+    try{ await api(body); await load(); }catch(err){ alert(err.message); }
+  });
+  if($('#tok').value) load();
+})();
+</script>
+</body>
+</html>

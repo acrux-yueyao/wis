@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>我一直描述不出来的东西是…… — THE WORLD IS YOURS</title>
+<meta name="description" content="接着这句话写下去。你的文字会被一台机器转译成一幅画面——它一定会误解一些什么。">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/tell.css">
+</head>
+<body class="ready">
+<a class="skip" href="#story">跳到输入框 / Skip to the form</a>
+<div id="grain" aria-hidden="true"></div>
+<a class="chrome" id="brand" href="../">THE WORLD IS YOURS</a>
+<nav class="chrome" id="menu" aria-label="Pages">
+  <a href="../stories/">故 事 墙 · STORIES</a>
+  <a href="../">← 展 览 · EXHIBITION</a>
+</nav>
+
+<main class="tp">
+  <h1 class="stem">我一直描述不出来的东西是<em>……</em></h1>
+  <div class="stem-en">The thing I can never describe is…</div>
+
+  <p class="lede">这句话来自我们的问卷。三十四个人接着它写下了自己的答案——雨来之前的气味、母亲叫我名字的方式、真心。现在轮到你。<br>写下它。一台机器会试着把它转译成一幅画面，风格和展厅里的十一段影像一样；它一定会误解一些什么——那正是这件作品想让你看见的。</p>
+  <p class="lede en">This sentence comes from our survey; thirty-four people finished it before you. Now it is your turn. Write it down — a machine will try to translate it into an image in the style of the eleven films, and it will certainly misunderstand something. That is the point.</p>
+
+  <form id="f" novalidate>
+    <label for="story">你的答案 · YOUR ANSWER<small>10–600 字 · 中文或英文都可以 · Chinese or English</small></label>
+    <textarea id="story" name="text" maxlength="600" required placeholder="……"></textarea>
+
+    <div class="row">
+      <div>
+        <label for="initials">署名（可选）· INITIALS, OPTIONAL<small>例如 Y.Y. —— 不署名即匿名 · leave blank to stay anonymous</small></label>
+        <input type="text" id="initials" name="initials" maxlength="12" autocomplete="off">
+      </div>
+      <div>
+        <label for="email">撤回用邮箱（可选）· EMAIL FOR WITHDRAWAL, OPTIONAL<small>只用于你日后申请删除 · never shown, never used for anything else</small></label>
+        <input type="email" id="email" name="email" maxlength="120" autocomplete="off">
+      </div>
+    </div>
+
+    <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <label class="consent" for="consent">
+      <input type="checkbox" id="consent" name="consent" required>
+      <span>我知道这段文字可能会在网站和展览现场展示，并被转译成一幅<b>生成画面</b>——那是机器的再读，不是我的故事；我可以通过上面的邮箱申请撤回。<br><span style="color:var(--sub)">I understand this text may be shown on the website and in the exhibition, and translated into a <b>generated image</b> — a machine's second reading, not my story. I can withdraw it via the email above.</span></span>
+    </label>
+
+    <button class="send" type="submit" id="send">交 出 去 · SEND</button>
+    <div class="msg" id="msg" aria-live="polite"></div>
+  </form>
+
+  <p class="fine">投稿先经过策展人的眼睛，再交给机器；生成的画面由策展人从多张备选中选定，标注为 generated second reading。不收集姓名；含他人可识别隐私的内容不会展示。<br>Submissions pass a curator before they reach the machine; images are chosen from several candidates and labelled as generated second readings. No names are collected; text that identifies other people is not shown.</p>
+</main>
+
+<script>
+(function(){
+  const f=document.getElementById('f'), msg=document.getElementById('msg'), btn=document.getElementById('send');
+  f.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const text=f.text.value.trim();
+    if(text.length<10){ msg.className='msg err'; msg.textContent='再写多一点——至少十个字。 / A little more, please — at least ten characters.'; return; }
+    if(!f.consent.checked){ msg.className='msg err'; msg.textContent='请先勾选知情同意。 / Please tick the consent box first.'; return; }
+    btn.disabled=true; msg.className='msg'; msg.textContent='正在交出去…';
+    try{
+      const r=await fetch('/api/submit',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({text, initials:f.initials.value.trim(), email:f.email.value.trim(), website:f.website.value, consent:true, lang:/[一-鿿]/.test(text)?'zh':'en'})});
+      const j=await r.json().catch(()=>({}));
+      if(!r.ok) throw new Error(j.error||('HTTP '+r.status));
+      msg.className='msg ok'; msg.textContent='收到了。它会先经过一个人的眼睛，再交给机器。 / Received. It will pass a person before it reaches the machine.';
+      f.reset();
+    }catch(err){
+      msg.className='msg err'; msg.textContent='没有交出去：'+err.message+' —— 请稍后再试。 / Not sent: please try again later.';
+    }
+    btn.disabled=false;
+  });
+})();
+</script>
+</body>
+</html>

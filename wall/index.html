@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wall — THE WORLD IS YOURS</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/tell.css">
+</head>
+<body class="wall ready">
+<div id="grain" aria-hidden="true"></div>
+<div id="wallstage" aria-live="polite"></div>
+<div id="wallhint">F · FULLSCREEN &nbsp; ← → · STEP &nbsp; R · RELOAD &nbsp; · installation display mode</div>
+
+<script>
+(async function(){
+  const stage=document.getElementById('wallstage');
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const HOLD_TEXT=5500, HOLD_PIC=9000, HOLD_NOPIC=8000;
+  let list=[];
+  async function load(){
+    try{ const r=await fetch('/api/stories?cb='+Date.now()); if(r.ok) list=(await r.json()).stories||[]; }catch(e){}
+    if(!list.length){ try{ const r=await fetch('../stories/data.json?cb='+Date.now()); if(r.ok) list=(await r.json()).stories||[]; }catch(e){} }
+  }
+  await load();
+  if(!list.length){ stage.innerHTML='<div class="slide on"><div class="body"><div class="stem">我一直描述不出来的东西是……</div><div class="txt">墙上还是空的。</div></div></div>'; return; }
+  const stem=l=>l==='en'?'THE THING I CAN NEVER DESCRIBE IS…':'我一直描述不出来的东西是……';
+  let i=-1, timer=null, cur=null;
+  function show(n){
+    i=(n+list.length)%list.length; const s=list[i];
+    const d=document.createElement('div'); d.className='slide';
+    d.innerHTML=`${s.image?`<div class="pic" style="background-image:url('${esc(s.image)}')"></div>`:''}<div class="shade"></div>
+      <div class="body"><div class="stem">${stem(s.lang)}</div><div class="txt">${esc(s.text)}</div>
+      <div class="by">${s.initials?esc(s.initials):'匿名 · ANONYMOUS'}</div></div>
+      ${s.image?`<div class="tag">generated second reading</div>`:''}`;
+    stage.appendChild(d);
+    void d.offsetHeight; d.classList.add('on');
+    if(cur){ const o=cur; o.classList.remove('on'); setTimeout(()=>o.remove(),2000); }
+    cur=d;
+    clearTimeout(timer);
+    if(s.image){ timer=setTimeout(()=>{ d.classList.add('pic-on'); timer=setTimeout(()=>show(i+1),HOLD_PIC); },HOLD_TEXT); }
+    else timer=setTimeout(()=>show(i+1),HOLD_NOPIC);
+  }
+  show(0);
+  // refresh the list every 3 minutes so new approvals appear during a session
+  setInterval(load,180000);
+  // keys + cursor
+  let hide=null; const body=document.body;
+  addEventListener('mousemove',()=>{ body.classList.add('cursor'); clearTimeout(hide); hide=setTimeout(()=>body.classList.remove('cursor'),2500); });
+  addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight') show(i+1);
+    if(e.key==='ArrowLeft') show(i-1);
+    if(e.key==='f'||e.key==='F'){ document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen(); }
+    if(e.key==='r'||e.key==='R') location.reload();
+  });
+})();
+</script>
+</body>
+</html>

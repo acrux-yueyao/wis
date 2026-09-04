@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>故事墙 · Stories — THE WORLD IS YOURS</title>
+<meta name="description" content="观众接着「我一直描述不出来的东西是……」写下的答案，与机器对它们的再读。">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/tell.css">
+</head>
+<body class="ready">
+<div id="grain" aria-hidden="true"></div>
+<a class="chrome" id="brand" href="../">THE WORLD IS YOURS</a>
+<nav class="chrome" id="menu" aria-label="Pages">
+  <a href="../tell/">写 下 你 的 · TELL YOURS</a>
+  <a href="../wall/">装 置 模 式 · WALL</a>
+  <a href="../">← 展 览 · EXHIBITION</a>
+</nav>
+
+<main class="sw">
+  <h1>我一直描述不出来的东西是<em>……</em><br><span style="font-size:.6em;color:var(--dim);font-style:italic">The thing I can never describe is…</span></h1>
+  <p class="sub">观众接着这句话写下的答案，和一台机器对它们的再读。画面的风格来自展厅里的十一段影像；它们不是故事本身，是猜测——和你脑中那幅一定不一样。<br>Answers written by visitors, and a machine's second reading of each. The images borrow the style of the eleven films; they are guesses, not the stories — and never the picture in your head.</p>
+  <div class="grid" id="grid" aria-live="polite"></div>
+  <p class="empty" id="empty" hidden>墙上还是空的——去写下第一条。 / The wall is still empty — go write the first one.</p>
+</main>
+
+<script>
+(async function(){
+  const grid=document.getElementById('grid'), empty=document.getElementById('empty');
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  let list=[];
+  try{ const r=await fetch('/api/stories'); if(r.ok) list=(await r.json()).stories||[]; }catch(e){}
+  if(!list.length){ try{ const r=await fetch('data.json'); if(r.ok) list=(await r.json()).stories||[]; }catch(e){} }
+  if(!list.length){ empty.hidden=false; return; }
+  const stem=l=>l==='en'?'THE THING I CAN NEVER DESCRIBE IS…':'我一直描述不出来的东西是……';
+  grid.innerHTML=list.map(s=>`
+    <article class="card">
+      <div class="img">${s.image?`<img src="${esc(s.image)}" alt="${esc(s.alt||'Generated second reading of this story')}" loading="lazy">`:`<div class="wait">等待被再读<br>AWAITING ITS SECOND READING</div>`}</div>
+      <div class="stem">${stem(s.lang)}</div>
+      <div class="txt">${esc(s.text)}</div>
+      <div class="by">${s.initials?esc(s.initials):'ANONYMOUS · 匿名'} · ${new Date(s.createdAt).toISOString().slice(0,10)}</div>
+      ${s.image?`<div class="tag">generated second reading — not the story, a guess at it</div>`:''}
+    </article>`).join('');
+})();
+</script>
+</body>
+</html>
