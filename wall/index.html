@@ -33,7 +33,7 @@
     d.innerHTML=`${s.image?`<div class="pic" style="background-image:url('${esc(s.image)}')"></div>`:''}<div class="shade"></div>
       <div class="body"><div class="stem">${stem(s.lang)}</div><div class="txt">${esc(s.text)}</div>
       <div class="by">${s.initials?esc(s.initials):'匿名 · ANONYMOUS'}</div></div>
-      ${s.image?`<div class="tag">generated second reading</div>`:''}`;
+      ${s.image?`<div class="tag">a machine's guess · 机器的猜测</div>`:''}`;
     stage.appendChild(d);
     void d.offsetHeight; d.classList.add('on');
     if(cur){ const o=cur; o.classList.remove('on'); setTimeout(()=>o.remove(),2000); }

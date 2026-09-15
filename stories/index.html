@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>故事墙 · Stories — THE WORLD IS YOURS</title>
-<meta name="description" content="观众接着「我一直描述不出来的东西是……」写下的答案，与机器对它们的再读。">
+<meta name="description" content="观众接着「我一直描述不出来的东西是……」写下的答案，和一个程序照着画的图。">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="stylesheet" href="../assets/tell.css">
 </head>
@@ -19,7 +19,7 @@
 
 <main class="sw">
   <h1>我一直描述不出来的东西是<em>……</em><br><span style="font-size:.6em;color:var(--dim);font-style:italic">The thing I can never describe is…</span></h1>
-  <p class="sub">观众接着这句话写下的答案，和一台机器对它们的再读。画面的风格来自展厅里的十一段影像；它们不是故事本身，是猜测——和你脑中那幅一定不一样。<br>Answers written by visitors, and a machine's second reading of each. The images borrow the style of the eleven films; they are guesses, not the stories — and never the picture in your head.</p>
+  <p class="sub">观众接着这句话写下的答案，和一个程序照着画的图。程序只看过展厅里的十一段影像，画出来的是它的猜测，跟写的人心里那幅多半不一样。<br>Answers written by visitors, and the picture a program drew from each. The program has only seen the eleven films, so what it draws is its guess, and probably not what the writer had in mind.</p>
   <div class="grid" id="grid" aria-live="polite"></div>
   <p class="empty" id="empty" hidden>墙上还是空的——去写下第一条。 / The wall is still empty — go write the first one.</p>
 </main>
@@ -35,11 +35,11 @@
   const stem=l=>l==='en'?'THE THING I CAN NEVER DESCRIBE IS…':'我一直描述不出来的东西是……';
   grid.innerHTML=list.map(s=>`
     <article class="card">
-      <div class="img">${s.image?`<img src="${esc(s.image)}" alt="${esc(s.alt||'Generated second reading of this story')}" loading="lazy">`:`<div class="wait">等待被再读<br>AWAITING ITS SECOND READING</div>`}</div>
+      <div class="img">${s.image?`<img src="${esc(s.image)}" alt="${esc(s.alt||'A picture a program drew from this story')}" loading="lazy">`:`<div class="wait">还没画<br>AWAITING ITS SECOND READING</div>`}</div>
       <div class="stem">${stem(s.lang)}</div>
       <div class="txt">${esc(s.text)}</div>
       <div class="by">${s.initials?esc(s.initials):'ANONYMOUS · 匿名'} · ${new Date(s.createdAt).toISOString().slice(0,10)}</div>
-      ${s.image?`<div class="tag">generated second reading — not the story, a guess at it</div>`:''}
+      ${s.image?`<div class="tag">机器的猜测 · a machine's guess, not the story</div>`:''}
     </article>`).join('');
 })();
 </script>
