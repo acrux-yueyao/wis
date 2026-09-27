@@ -7,21 +7,26 @@
 <meta name="description" content="观众接着「我一直描述不出来的东西是……」写下的答案，和一个程序照着画的图。">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="stylesheet" href="../assets/tell.css">
+<script src="../assets/lang.js"></script>
 </head>
 <body class="ready">
 <div id="grain" aria-hidden="true"></div>
-<a class="chrome" id="brand" href="../">THE WORLD IS YOURS</a>
-<nav class="chrome" id="menu" aria-label="Pages">
-  <a href="../tell/">写 下 你 的 · TELL YOURS</a>
-  <a href="../wall/">装 置 模 式 · WALL</a>
-  <a href="../">← 展 览 · EXHIBITION</a>
-</nav>
+<header class="tbar">
+  <a href="../" class="tb-brand">THE WORLD IS YOURS</a>
+  <nav class="tb-nav" aria-label="Pages">
+    <a href="../tell/"><span class="zh">写一条</span><span class="en">Write one</span></a>
+    <a href="../wall/"><span class="zh">装置模式</span><span class="en">Wall</span></a>
+    <a href="../"><span class="zh">展览</span><span class="en">Exhibition</span></a>
+    <button id="lt" type="button"><span data-v="zh">中</span> / <span data-v="en">EN</span></button>
+  </nav>
+</header>
 
 <main class="sw">
-  <h1>我一直描述不出来的东西是<em>……</em><br><span style="font-size:.6em;color:var(--dim);font-style:italic">The thing I can never describe is…</span></h1>
-  <p class="sub">观众接着这句话写下的答案，和一个程序照着画的图。程序只看过展厅里的十一段影像，画出来的是它的猜测，跟写的人心里那幅多半不一样。<br>Answers written by visitors, and the picture a program drew from each. The program has only seen the eleven films, so what it draws is its guess, and probably not what the writer had in mind.</p>
+  <h1><span class="zh"><span class="nb">我一直描述</span><span class="nb">不出来的</span><span class="nb">东西是<em>……</em></span></span><span class="en">The thing I can <span class="nb">never describe is<em>…</em></span></span></h1>
+  <p class="sub zh">观众对这道题的回答，以及程序根据每条回答生成的图。程序只学过展览里的十一段影像。</p>
+  <p class="sub en">Visitors’ answers to this question, each with a picture a program made from it. The program was trained only on the eleven films in the exhibition.</p>
   <div class="grid" id="grid" aria-live="polite"></div>
-  <p class="empty" id="empty" hidden>墙上还是空的——去写下第一条。 / The wall is still empty — go write the first one.</p>
+  <p class="empty" id="empty" hidden><span class="zh">墙上还是空的。<a href="../tell/">写第一条</a>。</span><span class="en">The wall is still empty. <a href="../tell/">Write the first one</a>.</span></p>
 </main>
 
 <script>
@@ -32,14 +37,14 @@
   try{ const r=await fetch('/api/stories'); if(r.ok) list=(await r.json()).stories||[]; }catch(e){}
   if(!list.length){ try{ const r=await fetch('data.json'); if(r.ok) list=(await r.json()).stories||[]; }catch(e){} }
   if(!list.length){ empty.hidden=false; return; }
-  const stem=l=>l==='en'?'THE THING I CAN NEVER DESCRIBE IS…':'我一直描述不出来的东西是……';
+  const stem=l=>l==='en'?'The thing I can never describe is…':'我一直描述不出来的东西是……';
   grid.innerHTML=list.map(s=>`
     <article class="card">
-      <div class="img">${s.image?`<img src="${esc(s.image)}" alt="${esc(s.alt||'A picture a program drew from this story')}" loading="lazy">`:`<div class="wait">还没画<br>AWAITING ITS SECOND READING</div>`}</div>
+      <div class="img">${s.image?`<img src="${esc(s.image)}" alt="${esc(s.alt||'A picture a program drew from this story')}" loading="lazy">`:`<div class="wait"><span class="zh">还没画</span><span class="en">not drawn yet</span></div>`}</div>
       <div class="stem">${stem(s.lang)}</div>
       <div class="txt">${esc(s.text)}</div>
-      <div class="by">${s.initials?esc(s.initials):'ANONYMOUS · 匿名'} · ${new Date(s.createdAt).toISOString().slice(0,10)}</div>
-      ${s.image?`<div class="tag">机器的猜测 · a machine's guess, not the story</div>`:''}
+      <div class="by">${s.initials?esc(s.initials):'<span class="zh">匿名</span><span class="en">anonymous</span>'} · ${new Date(s.createdAt).toISOString().slice(0,10)}</div>
+      ${s.image?`<div class="tag"><span class="zh">图是机器猜的</span><span class="en">picture: a machine's guess</span></div>`:''}
     </article>`).join('');
 })();
 </script>

@@ -4,38 +4,52 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>我一直描述不出来的东西是…… — THE WORLD IS YOURS</title>
-<meta name="description" content="接着这句话往下写。写完以后，一个只看过我们十一段影像的程序会试着把它画出来。">
+<meta name="description" content="问卷里的一道题：我一直描述不出来的东西是……写下你的答案，程序会根据它生成一张图，与文字一起展出。">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="stylesheet" href="../assets/tell.css">
+<script src="../assets/lang.js"></script>
 </head>
 <body class="ready">
 <a class="skip" href="#story">跳到输入框 / Skip to the form</a>
 <div id="grain" aria-hidden="true"></div>
-<a class="chrome" id="brand" href="../">THE WORLD IS YOURS</a>
-<nav class="chrome" id="menu" aria-label="Pages">
-  <a href="../stories/">故 事 墙 · STORIES</a>
-  <a href="../">← 展 览 · EXHIBITION</a>
-</nav>
+<header class="tbar">
+  <a href="../" class="tb-brand">THE WORLD IS YOURS</a>
+  <nav class="tb-nav" aria-label="Pages">
+    <a href="../stories/"><span class="zh">故事墙</span><span class="en">Stories</span></a>
+    <a href="../"><span class="zh">展览</span><span class="en">Exhibition</span></a>
+    <button id="lt" type="button"><span data-v="zh">中</span> / <span data-v="en">EN</span></button>
+  </nav>
+</header>
 
 <main class="tp">
-  <h1 class="stem">我一直描述不出来的东西是<em>……</em></h1>
-  <div class="stem-en">The thing I can never describe is…</div>
+  <h1 class="stem"><span class="zh"><span class="nb">我一直描述</span><span class="nb">不出来的</span><span class="nb">东西是<em>……</em></span></span><span class="en">The thing I can <span class="nb">never describe is<em>…</em></span></span></h1>
 
-  <p class="lede">这是我们问卷里的一道题。之前有三十四个人填过：有人写雨来之前的气味，有人写妈妈叫自己名字的方式，有人只写了两个字，真心。<br>你也写一个。写完以后，我们会让一个只看过这十一段影像的程序试着把它画出来。它多半会画错。没关系，画错的我们也一起挂出来。</p>
-  <p class="lede en">This is a question from our survey. Thirty-four people have answered it so far: the smell before rain, the way a mother says your name, one person just wrote "sincerity".<br>Write yours. Afterwards a program that has only ever seen the eleven films will try to draw it. It will probably get something wrong. That's fine, we hang the wrong ones too.</p>
+  <div class="lede zh">
+    <p>这是我们问卷里的一道题，目前有三十四个人回答过。</p>
+    <p>写下你的答案。我们会用一个程序根据它生成一张图，这个程序只学过展览里的十一段影像。图和你的文字会一起展出。</p>
+  </div>
+  <div class="lede en">
+    <p>This is a question from our survey. Thirty-four people have answered it so far.</p>
+    <p>Write your answer. A program trained only on the eleven films in the exhibition will make a picture from it. The picture is shown next to your words.</p>
+  </div>
 
   <form id="f" novalidate>
-    <label for="story">你的答案 · YOUR ANSWER<small>10–600 字 · 中文或英文都可以 · Chinese or English</small></label>
-    <textarea id="story" name="text" maxlength="600" required placeholder="……"></textarea>
+    <div class="field">
+      <label for="story"><span class="zh">你的答案</span><span class="en">Your answer</span></label>
+      <textarea id="story" name="text" maxlength="600" required placeholder="……"></textarea>
+      <div class="hint"><span class="zh">十个字以上，六百字以内。中文英文都行。</span><span class="en">Between 10 and 600 characters, in Chinese or English.</span><span class="count" id="count">0 / 600</span></div>
+    </div>
 
     <div class="row">
-      <div>
-        <label for="initials">署名（可选）· INITIALS, OPTIONAL<small>例如 Y.Y. —— 不署名即匿名 · leave blank to stay anonymous</small></label>
-        <input type="text" id="initials" name="initials" maxlength="12" autocomplete="off">
+      <div class="field">
+        <label for="initials"><span class="zh">署名</span><span class="en">Initials</span><i><span class="zh">可不填</span><span class="en">optional</span></i></label>
+        <input type="text" id="initials" name="initials" maxlength="12" autocomplete="off" placeholder="Y.Y.">
+        <div class="hint"><span class="zh">不填就是匿名。</span><span class="en">Leave blank to stay anonymous.</span></div>
       </div>
-      <div>
-        <label for="email">撤回用邮箱（可选）· EMAIL FOR WITHDRAWAL, OPTIONAL<small>只用于你日后申请删除 · never shown, never used for anything else</small></label>
+      <div class="field">
+        <label for="email"><span class="zh">邮箱</span><span class="en">Email</span><i><span class="zh">可不填</span><span class="en">optional</span></i></label>
         <input type="email" id="email" name="email" maxlength="120" autocomplete="off">
+        <div class="hint"><span class="zh">只在你想撤回时用，不会公开。</span><span class="en">Only used if you want it taken down. Never shown.</span></div>
       </div>
     </div>
 
@@ -43,34 +57,37 @@
 
     <label class="consent" for="consent">
       <input type="checkbox" id="consent" name="consent" required>
-      <span>我知道这段文字可能会放在网站和展览现场，也知道会有一个程序<b>照着它画一张图</b>，画的是它的猜测，不是我的故事。想撤回的话，用上面的邮箱写信就行。<br><span style="color:var(--sub)">I understand this text may appear on the website and in the exhibition, and that a program will <b>draw a picture from it</b>: its guess, not my story. If I want it taken down I can email the address above.</span></span>
+      <span class="zh">我知道这段文字可能会放在网站和展览现场，也知道会有一个程序照着它画一张图——画的是它的猜测，不是我的故事。想撤回的话，写信到上面的邮箱就行。</span>
+      <span class="en">I understand this may appear on the website and in the exhibition, and that a program will draw a picture from it — its guess, not my story. I can ask for it to be taken down by email.</span>
     </label>
 
-    <button class="send" type="submit" id="send">交 出 去 · SEND</button>
+    <button class="send" type="submit" id="send"><span class="zh">交出去</span><span class="en">Send</span></button>
     <div class="msg" id="msg" aria-live="polite"></div>
   </form>
 
-  <p class="fine">每一条都是人先看过，再交给程序；程序画两张，我们挑一张，旁边写明是机器猜的。不问姓名。写到别人隐私的不会放出来。<br>A person reads every entry before the program does. The program draws two pictures, we pick one, and it is labelled as a machine's guess. We don't ask for names. Anything that gives away another person's private life stays off the wall.</p>
+  <p class="fine zh">每一条都是人先看过，再交给程序。程序画两张，我们挑一张，旁边写明是机器猜的。不问姓名。写到别人隐私的不会放出来。</p>
+  <p class="fine en">A person reads every entry before the program does. It draws two pictures, we pick one, and the picture is labelled as a machine’s guess. We don’t ask for names, and anything that gives away someone else’s private life stays off the wall.</p>
 </main>
 
 <script>
 (function(){
   const f=document.getElementById('f'), msg=document.getElementById('msg'), btn=document.getElementById('send');
+  const c=document.getElementById('count'); const cnt=()=>{c.textContent=f.text.value.length+' / 600';}; f.text.addEventListener('input',cnt);
   f.addEventListener('submit', async e=>{
     e.preventDefault();
     const text=f.text.value.trim();
-    if(text.length<10){ msg.className='msg err'; msg.textContent='再写多一点——至少十个字。 / A little more, please — at least ten characters.'; return; }
-    if(!f.consent.checked){ msg.className='msg err'; msg.textContent='请先勾选知情同意。 / Please tick the consent box first.'; return; }
-    btn.disabled=true; msg.className='msg'; msg.textContent='正在交出去…';
+    if(text.length<10){ msg.className='msg err'; msg.textContent=(WISLANG()==='zh'?'再多写一点，至少十个字。':'A little more, please: at least ten characters.'); return; }
+    if(!f.consent.checked){ msg.className='msg err'; msg.textContent=(WISLANG()==='zh'?'请先勾选上面那一条。':'Please tick the box above first.'); return; }
+    btn.disabled=true; msg.className='msg'; msg.textContent=(WISLANG()==='zh'?'正在发送……':'Sending…');
     try{
       const r=await fetch('/api/submit',{method:'POST',headers:{'Content-Type':'application/json'},
         body:JSON.stringify({text, initials:f.initials.value.trim(), email:f.email.value.trim(), website:f.website.value, consent:true, lang:/[一-鿿]/.test(text)?'zh':'en'})});
       const j=await r.json().catch(()=>({}));
       if(!r.ok) throw new Error(j.error||('HTTP '+r.status));
-      msg.className='msg ok'; msg.textContent='收到了。它会先经过一个人的眼睛，再交给机器。 / Received. It will pass a person before it reaches the machine.';
-      f.reset();
+      msg.className='msg ok'; msg.textContent=(WISLANG()==='zh'?'收到了，谢谢你。我们看过以后会放到故事墙上。':'Got it — thank you. We’ll read it, then it goes up on the wall.');
+      f.reset(); cnt();
     }catch(err){
-      msg.className='msg err'; msg.textContent='没有交出去：'+err.message+' —— 请稍后再试。 / Not sent: please try again later.';
+      msg.className='msg err'; msg.textContent=(WISLANG()==='zh'?'没发出去，请过一会儿再试。':'That didn’t go through. Please try again in a moment.')+' ('+err.message+')';
     }
     btn.disabled=false;
   });
