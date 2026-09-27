@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>我一直描述不出来的东西是……</title>
+<link rel="stylesheet" href="../assets/site.css?v=202609271503">
+<link rel="stylesheet" href="../assets/tell.css?v=202609271503">
+<script src="../assets/lang.js?v=202609271503"></script>
+<style>
+  body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent}
+  .xbar{position:absolute;top:0;right:0;z-index:5;padding:4.2vh 5vw}
+  .tp{padding-top:18vh}
+  .tp .send{font-size:16px;padding:1.05em 3em}
+  .tp textarea{font-size:21px}
+  #thanks{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:0 8vw;opacity:0;pointer-events:none;transition:opacity .8s}
+  #thanks.on{opacity:1;pointer-events:auto}
+  #thanks .t{font-family:var(--serif);font-size:clamp(26px,4vw,40px);color:var(--ink);line-height:1.4}
+  #thanks .s{margin-top:1.4em;color:var(--sub);font-size:15px;line-height:1.8}
+  #thanks button{margin-top:3em;font-size:14px;color:var(--dim);border-bottom:1px solid var(--faint);padding-bottom:.2em}
+</style>
+</head>
+<body class="ready">
+<div id="grain" aria-hidden="true"></div>
+<div class="xbar"><button id="lt" type="button"><span data-v="zh">中</span> / <span data-v="en">EN</span></button></div>
+
+<main class="tp">
+  <h1 class="stem"><span class="zh"><span class="nb">我一直描述</span><span class="nb">不出来的</span><span class="nb">东西是<em>……</em></span></span><span class="en">The thing I can <span class="nb">never describe is<em>…</em></span></span></h1>
+
+  <div class="lede zh">
+    <p>这是我们问卷里的一道题，目前有三十四个人回答过。</p>
+    <p>写下你的答案。我们会用一个程序根据它生成一张图，这个程序只学过展览里的十一段影像。图和你的文字会一起展出。</p>
+  </div>
+  <div class="lede en">
+    <p>This is a question from our survey. Thirty-four people have answered it so far.</p>
+    <p>Write your answer. A program trained only on the eleven films in the exhibition will make a picture from it. The picture is shown next to your words.</p>
+  </div>
+
+  <form id="f" novalidate autocomplete="off">
+    <div class="field">
+      <label for="story"><span class="zh">你的答案</span><span class="en">Your answer</span></label>
+      <textarea id="story" name="text" maxlength="600" required placeholder="……"></textarea>
+      <div class="hint"><span class="zh">十个字以上，六百字以内。中文英文都行。</span><span class="en">Between 10 and 600 characters, in Chinese or English.</span><span class="count" id="count">0 / 600</span></div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="initials"><span class="zh">署名</span><span class="en">Initials</span><i><span class="zh">可不填</span><span class="en">optional</span></i></label>
+        <input type="text" id="initials" name="initials" maxlength="12" placeholder="Y.Y.">
+        <div class="hint"><span class="zh">不填就是匿名。</span><span class="en">Leave blank to stay anonymous.</span></div>
+      </div>
+      <div class="field">
+        <label for="email"><span class="zh">邮箱</span><span class="en">Email</span><i><span class="zh">可不填</span><span class="en">optional</span></i></label>
+        <input type="email" id="email" name="email" maxlength="120">
+        <div class="hint"><span class="zh">只在你想撤回时用，不会公开。</span><span class="en">Only used if you want it taken down. Never shown.</span></div>
+      </div>
+    </div>
+
+    <input class="hp" type="text" name="website" tabindex="-1" aria-hidden="true">
+
+    <label class="consent" for="consent">
+      <input type="checkbox" id="consent" name="consent" required>
+      <span class="zh">我知道这段文字可能会在展览现场和网站上展出，也知道会有一个程序根据它生成一张图。想撤回的话，写信到上面的邮箱。</span>
+      <span class="en">I understand this may be shown in the exhibition and on the website, and that a program will make a picture from it. I can ask for it to be taken down by email.</span>
+    </label>
+
+    <button class="send" type="submit" id="send"><span class="zh">交出去</span><span class="en">Send</span></button>
+    <div class="msg" id="msg" aria-live="polite"></div>
+  </form>
+
+  <p class="fine zh">每一条都会先由人看过，再交给程序。不问姓名。写到别人隐私的不会展出。</p>
+  <p class="fine en">A person reads every entry before the program does. We don’t ask for names. Anything about someone else’s private life is not shown.</p>
+</main>
+
+<div id="thanks" role="status" aria-live="polite">
+  <div class="t"><span class="zh">收到了，谢谢你。</span><span class="en">Received. Thank you.</span></div>
+  <div class="s"><span class="zh">看过以后，它会出现在展厅的屏幕上。</span><span class="en">Once it has been read, it will appear on the screen in the room.</span></div>
+  <button type="button" id="again"><span class="zh">下一位</span><span class="en">Next person</span></button>
+</div>
+
+<script>
+(function(){
+  const f=document.getElementById('f'), msg=document.getElementById('msg'), btn=document.getElementById('send');
+  const thanks=document.getElementById('thanks'), c=document.getElementById('count');
+  const zh=()=>WISLANG()==='zh';
+  const cnt=()=>{c.textContent=f.text.value.length+' / 600';};
+  f.text.addEventListener('input',cnt);
+  function clear(){ f.reset(); cnt(); msg.textContent=''; msg.className='msg'; window.scrollTo(0,0); }
+  let tThanks, tIdle;
+  function reset(){ clearTimeout(tThanks); thanks.classList.remove('on'); clear(); }
+  document.getElementById('again').addEventListener('click',reset);
+  // 现场设备：两分钟没人操作就清空，下一位看不到上一位写的内容
+  function idle(){ clearTimeout(tIdle); tIdle=setTimeout(()=>{ if(f.text.value||f.initials.value||f.email.value) clear(); },120000); }
+  ['input','pointerdown','keydown'].forEach(e=>addEventListener(e,idle,{passive:true}));
+  f.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const text=f.text.value.trim();
+    if(text.length<10){ msg.className='msg err'; msg.textContent=zh()?'再多写一点，至少十个字。':'A little more, please: at least ten characters.'; return; }
+    if(!f.consent.checked){ msg.className='msg err'; msg.textContent=zh()?'请先勾选上面那一条。':'Please tick the box above first.'; return; }
+    btn.disabled=true; msg.className='msg'; msg.textContent=zh()?'正在发送……':'Sending…';
+    try{
+      const r=await fetch('/api/submit',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({text, initials:f.initials.value.trim(), email:f.email.value.trim(), website:f.website.value, consent:true, source:'expo', lang:/[一-鿿]/.test(text)?'zh':'en'})});
+      const j=await r.json().catch(()=>({}));
+      if(!r.ok) throw new Error(j.error||('HTTP '+r.status));
+      thanks.classList.add('on'); tThanks=setTimeout(reset,12000);
+    }catch(err){
+      msg.className='msg err'; msg.textContent=(zh()?'没发出去，请过一会儿再试。':'That didn’t go through. Please try again in a moment.')+' ('+err.message+')';
+    }
+    btn.disabled=false;
+  });
+})();
+</script>
+</body>
+</html>

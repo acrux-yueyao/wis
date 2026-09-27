@@ -35,7 +35,7 @@
           <div>
             <div class="st ${s.status}">${s.status}</div>
             <div class="txt">${esc(s.text)}</div>
-            <div class="meta">${s.id} · ${s.initials?esc(s.initials):'anon'} · ${s.lang} · ${new Date(s.createdAt).toLocaleString()} ${s.email?'· '+esc(s.email):''}</div>
+            <div class="meta">${s.source==="expo"?"<b style=\"color:var(--amber)\">展览现场</b> · ":""}${s.id} · ${s.initials?esc(s.initials):'anon'} · ${s.lang} · ${new Date(s.createdAt).toLocaleString()} ${s.email?'· '+esc(s.email):''}</div>
             ${s.image?`<img src="${esc(s.image)}" alt="">`:''}
             <input type="text" class="img" placeholder="image url (e.g. /stories/img/${s.id}.jpg)" value="${esc(s.image||'')}" style="width:100%;margin-top:.8em">
             <input type="text" class="alt" placeholder="alt text for the image" value="${esc(s.alt||'')}" style="width:100%;margin-top:.4em">

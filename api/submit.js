@@ -13,18 +13,20 @@ module.exports = async (req, res) => {
   const email = String(b.email || '').slice(0, 120).trim();
   if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return json(res, 400, { error: 'invalid email' });
   const lang = b.lang === 'en' ? 'en' : 'zh';
+  const source = b.source === 'expo' ? 'expo' : 'web';
 
-  // rate limit: 5 submissions per IP per hour
+  // rate limit per IP per hour: 5 online; 60 for the exhibition kiosk (one shared device)
+  const limit = source === 'expo' ? 60 : 5;
   const ip = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
-  const bucket = `rl:${crypto.createHash('sha256').update(ip).digest('hex').slice(0, 16)}:${Math.floor(Date.now() / 3600000)}`;
+  const bucket = `rl:${source}:${crypto.createHash('sha256').update(ip).digest('hex').slice(0, 16)}:${Math.floor(Date.now() / 3600000)}`;
   try {
     const n = await cmd('INCR', bucket);
     if (n === 1) await cmd('EXPIRE', bucket, 3600);
-    if (n > 5) return json(res, 429, { error: 'too many submissions — please try again in an hour' });
+    if (n > limit) return json(res, 429, { error: 'too many submissions — please try again in an hour' });
 
     const id = 's_' + Date.now().toString(36) + crypto.randomBytes(3).toString('hex');
     await cmd('HSET', `story:${id}`, 'id', id, 'text', text, 'initials', initials, 'email', email, 'lang', lang,
-      'status', 'pending', 'image', '', 'alt', '', 'createdAt', String(Date.now()));
+      'status', 'pending', 'image', '', 'alt', '', 'source', source, 'createdAt', String(Date.now()));
     await cmd('LPUSH', 'stories:all', id);
     return json(res, 200, { ok: true, id });
   } catch (e) {
