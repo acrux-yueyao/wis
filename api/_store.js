@@ -27,7 +27,7 @@ async function allStories() {
   return rows.map(flat).filter(Boolean).map(s => ({ ...s, createdAt: Number(s.createdAt) }));
 }
 function publicView(s) {
-  return { id: s.id, text: s.text, initials: s.initials || '', lang: s.lang || 'zh', image: s.image || '', alt: s.alt || '', createdAt: s.createdAt };
+  return { id: s.id, text: s.text, initials: s.initials || '', lang: s.lang || 'zh', image: s.image || '', alt: s.alt || '', source: s.source || 'web', createdAt: s.createdAt };
 }
 function json(res, code, body) {
   res.statusCode = code;

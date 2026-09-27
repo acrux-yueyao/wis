@@ -31,7 +31,7 @@
     i=(n+list.length)%list.length; const s=list[i];
     const d=document.createElement('div'); d.className='slide';
     d.innerHTML=`${s.image?`<div class="pic" style="background-image:url('${esc(s.image)}')"></div>`:''}<div class="shade"></div>
-      <div class="body"><div class="stem">${stem(s.lang)}</div><div class="txt">${esc(s.text)}</div>
+      <div class="body">${s.source==='expo'?'':`<div class="stem">${stem(s.lang)}</div>`}<div class="txt">${esc(s.text)}</div>
       <div class="by">${s.initials?esc(s.initials):'匿名 · ANONYMOUS'}</div></div>
       ${s.image?`<div class="tag">a machine's guess · 机器的猜测</div>`:''}`;
     stage.appendChild(d);
