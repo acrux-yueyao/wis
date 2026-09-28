@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
       return json(res, 200, { ok: true });
     }
     if (b.action === 'delete') {
-      await cmd('DEL', `story:${id}`); await cmd('LREM', 'stories:all', 0, id);
+      await cmd('DEL', `story:${id}`, `img:${id}`); await cmd('LREM', 'stories:all', 0, id);
       return json(res, 200, { ok: true });
     }
     return json(res, 400, { error: 'unknown action' });
