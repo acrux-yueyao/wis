@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <title>THE WORLD IS YOURS</title>
-<link rel="stylesheet" href="../assets/site.css?v=202609271556">
-<link rel="stylesheet" href="../assets/tell.css?v=202609271556">
-<script src="../assets/lang.js?v=202609271556"></script>
+<link rel="stylesheet" href="../assets/site.css?v=202609272101">
+<link rel="stylesheet" href="../assets/tell.css?v=202609272101">
+<script src="../assets/lang.js?v=202609272101"></script>
 <style>
   body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent}
   .xbar{position:absolute;top:0;right:0;z-index:5;padding:4.2vh 5vw}
@@ -93,6 +93,7 @@
         body:JSON.stringify({text, initials:f.initials.value.trim(), email:f.email.value.trim(), website:f.website.value, consent:true, source:'expo', lang:/[一-鿿]/.test(text)?'zh':'en'})});
       const j=await r.json().catch(()=>({}));
       if(!r.ok) throw new Error(j.error||('HTTP '+r.status));
+      fetch('/api/process',{keepalive:true}).catch(()=>{});
       thanks.classList.add('on'); tThanks=setTimeout(reset,12000);
     }catch(err){
       msg.className='msg err'; msg.textContent=(zh()?'没发出去，请过一会儿再试。':'That didn’t go through. Please try again in a moment.')+' ('+err.message+')';

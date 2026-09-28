@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wall — THE WORLD IS YOURS</title>
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="../assets/site.css?v=202609271459">
-<link rel="stylesheet" href="../assets/tell.css?v=202609271459">
+<link rel="stylesheet" href="../assets/site.css?v=202609272101">
+<link rel="stylesheet" href="../assets/tell.css?v=202609272101">
 </head>
 <body class="wall ready">
 <div id="grain" aria-hidden="true"></div>
@@ -18,15 +18,24 @@
   const stage=document.getElementById('wallstage');
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const HOLD_TEXT=5500, HOLD_PIC=9000, HOLD_NOPIC=8000;
-  let list=[];
+  let list=[], known=new Set(), queue=[];
   async function load(){
-    try{ const r=await fetch('/api/stories?cb='+Date.now()); if(r.ok) list=(await r.json()).stories||[]; }catch(e){}
-    if(!list.length){ try{ const r=await fetch('../stories/data.json?cb='+Date.now()); if(r.ok) list=(await r.json()).stories||[]; }catch(e){} }
+    let fresh=[];
+    try{ const r=await fetch('/api/stories?cb='+Date.now()); if(r.ok) fresh=(await r.json()).stories||[]; }catch(e){}
+    if(!fresh.length) return;
+    const first=!known.size;
+    fresh.forEach(s=>{ if(!known.has(s.id+(s.image?'+':''))){ known.add(s.id+(s.image?'+':'')); if(!first) queue.push(s.id); } });
+    list=fresh;
   }
-  await load();
-  if(!list.length){ stage.innerHTML='<div class="slide on"><div class="body"><div class="stem">我一直描述不出来的东西是……</div><div class="txt">墙上还是空的。</div></div></div>'; return; }
+  // the screen in the room keeps the automatic pipeline moving: check new entries, then draw them
+  async function tick(){ try{ await fetch('/api/process?cb='+Date.now()); }catch(e){} await load(); if(!cur && list.length) show(0); }
   const stem=l=>l==='en'?'THE THING I CAN NEVER DESCRIBE IS…':'我一直描述不出来的东西是……';
   let i=-1, timer=null, cur=null;
+  function next(){
+    const q=queue.shift();
+    if(q!==undefined){ const k=list.findIndex(s=>s.id===q); if(k>=0) return show(k); }
+    show(i+1);
+  }
   function show(n){
     i=(n+list.length)%list.length; const s=list[i];
     const d=document.createElement('div'); d.className='slide';
@@ -39,12 +48,12 @@
     if(cur){ const o=cur; o.classList.remove('on'); setTimeout(()=>o.remove(),2000); }
     cur=d;
     clearTimeout(timer);
-    if(s.image){ timer=setTimeout(()=>{ d.classList.add('pic-on'); timer=setTimeout(()=>show(i+1),HOLD_PIC); },HOLD_TEXT); }
-    else timer=setTimeout(()=>show(i+1),HOLD_NOPIC);
+    if(s.image){ timer=setTimeout(()=>{ d.classList.add('pic-on'); timer=setTimeout(next,HOLD_PIC); },HOLD_TEXT); }
+    else timer=setTimeout(next,HOLD_NOPIC);
   }
-  show(0);
-  // refresh the list every 3 minutes so new approvals appear during a session
-  setInterval(load,180000);
+  await load();
+  if(list.length) show(0);
+  tick(); setInterval(tick,30000);
   // keys + cursor
   let hide=null; const body=document.body;
   addEventListener('mousemove',()=>{ body.classList.add('cursor'); clearTimeout(hide); hide=setTimeout(()=>body.classList.remove('cursor'),2500); });

@@ -14,7 +14,7 @@
 <main class="ad">
   <h1>策展审核 · Curation</h1>
   <div class="tok"><input type="password" id="tok" placeholder="admin token" style="flex:1"><button id="go" class="send" style="margin:0">载 入</button></div>
-  <p class="note">流程：pending → 通过(approve) 后进入公开故事墙与装置模式；生成画面后把图片地址填进 image 保存。隐藏(hide)不删除；删除(delete)不可恢复（撤回申请用这个）。</p>
+  <p class="note">流程：投稿后由程序自动检查，通过的直接上墙并自动出图；被拦下的显示为 hidden 并注明原因，点「通过」放行。生成画面后把图片地址填进 image 保存。隐藏(hide)不删除；删除(delete)不可恢复（撤回申请用这个）。</p>
   <div class="list" id="list"></div>
 </main>
 <script>
@@ -35,7 +35,7 @@
           <div>
             <div class="st ${s.status}">${s.status}</div>
             <div class="txt">${esc(s.text)}</div>
-            <div class="meta">${s.source==="expo"?"<b style=\"color:var(--amber)\">展览现场</b> · ":""}${s.id} · ${s.initials?esc(s.initials):'anon'} · ${s.lang} · ${new Date(s.createdAt).toLocaleString()} ${s.email?'· '+esc(s.email):''}</div>
+            <div class="meta">${s.source==="expo"?"<b style=\"color:var(--amber)\">展览现场</b> · ":""}${s.id} · ${s.initials?esc(s.initials):'anon'} · ${s.lang} · ${new Date(s.createdAt).toLocaleString()} ${s.email?'· '+esc(s.email):''}${s.checked==='auto-ok'?' · 自动检查通过':''}${s.checked==='auto-held'?`<div style="color:#d98a7a;margin-top:.5em">自动检查拦下：${esc(s.reason||'')}（点「通过」即可放行并自动出图）</div>`:''}</div>
             ${s.image?`<img src="${esc(s.image)}" alt="">`:''}
             <input type="text" class="img" placeholder="image url (e.g. /stories/img/${s.id}.jpg)" value="${esc(s.image||'')}" style="width:100%;margin-top:.8em">
             <input type="text" class="alt" placeholder="alt text for the image" value="${esc(s.alt||'')}" style="width:100%;margin-top:.4em">

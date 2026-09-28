@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>我一直描述不出来的东西是…… — THE WORLD IS YOURS</title>
 <meta name="description" content="问卷里的一道题：我一直描述不出来的东西是……写下你的答案，程序会根据它生成一张图，与文字一起展出。">
-<link rel="stylesheet" href="../assets/site.css?v=202609271459">
-<link rel="stylesheet" href="../assets/tell.css?v=202609271459">
-<script src="../assets/lang.js?v=202609271459"></script>
+<link rel="stylesheet" href="../assets/site.css?v=202609272101">
+<link rel="stylesheet" href="../assets/tell.css?v=202609272101">
+<script src="../assets/lang.js?v=202609272101"></script>
 </head>
 <body class="ready">
 <a class="skip" href="#story">跳到输入框 / Skip to the form</a>
@@ -65,8 +65,8 @@
     <div class="msg" id="msg" aria-live="polite"></div>
   </form>
 
-  <p class="fine zh">每一条都是人先看过，再交给程序。程序画两张，我们挑一张，旁边写明是机器猜的。不问姓名。写到别人隐私的不会放出来。</p>
-  <p class="fine en">A person reads every entry before the program does. It draws two pictures, we pick one, and the picture is labelled as a machine’s guess. We don’t ask for names, and anything that gives away someone else’s private life stays off the wall.</p>
+  <p class="fine zh">每一条先由程序检查一遍，写到别人隐私、联系方式或广告的不会展出，留给我们人工看。图是程序生成的，旁边写明是机器猜的。不问姓名。</p>
+  <p class="fine en">Each entry is first checked by a program. Anything with another person’s private details, contact information or advertising is held back for us to read. The picture is generated and labelled as a machine’s guess. We don’t ask for names.</p>
 </main>
 
 <script>
@@ -84,6 +84,7 @@
         body:JSON.stringify({text, initials:f.initials.value.trim(), email:f.email.value.trim(), website:f.website.value, consent:true, lang:/[一-鿿]/.test(text)?'zh':'en'})});
       const j=await r.json().catch(()=>({}));
       if(!r.ok) throw new Error(j.error||('HTTP '+r.status));
+      fetch('/api/process',{keepalive:true}).catch(()=>{});
       msg.className='msg ok'; msg.textContent=(WISLANG()==='zh'?'收到了，谢谢你。我们看过以后会放到故事墙上。':'Got it — thank you. We’ll read it, then it goes up on the wall.');
       f.reset(); cnt();
     }catch(err){
